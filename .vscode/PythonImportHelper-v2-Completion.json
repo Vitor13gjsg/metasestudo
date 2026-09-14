@@ -1,0 +1,387 @@
+[
+    {
+        "label": "admin",
+        "importPath": "django.contrib",
+        "description": "django.contrib",
+        "isExtraImport": true,
+        "detail": "django.contrib",
+        "documentation": {}
+    },
+    {
+        "label": "admin",
+        "importPath": "django.contrib",
+        "description": "django.contrib",
+        "isExtraImport": true,
+        "detail": "django.contrib",
+        "documentation": {}
+    },
+    {
+        "label": "AppConfig",
+        "importPath": "django.apps",
+        "description": "django.apps",
+        "isExtraImport": true,
+        "detail": "django.apps",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "TestCase",
+        "importPath": "django.test",
+        "description": "django.test",
+        "isExtraImport": true,
+        "detail": "django.test",
+        "documentation": {}
+    },
+    {
+        "label": "render",
+        "importPath": "django.shortcuts",
+        "description": "django.shortcuts",
+        "isExtraImport": true,
+        "detail": "django.shortcuts",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "get_asgi_application",
+        "importPath": "django.core.asgi",
+        "description": "django.core.asgi",
+        "isExtraImport": true,
+        "detail": "django.core.asgi",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "path",
+        "importPath": "django.urls",
+        "description": "django.urls",
+        "isExtraImport": true,
+        "detail": "django.urls",
+        "documentation": {}
+    },
+    {
+        "label": "views",
+        "importPath": "core",
+        "description": "core",
+        "isExtraImport": true,
+        "detail": "core",
+        "documentation": {}
+    },
+    {
+        "label": "get_wsgi_application",
+        "importPath": "django.core.wsgi",
+        "description": "django.core.wsgi",
+        "isExtraImport": true,
+        "detail": "django.core.wsgi",
+        "documentation": {}
+    },
+    {
+        "label": "sys",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "sys",
+        "description": "sys",
+        "detail": "sys",
+        "documentation": {}
+    },
+    {
+        "label": "CoreConfig",
+        "kind": 6,
+        "importPath": "core.apps",
+        "description": "core.apps",
+        "peekOfCode": "class CoreConfig(AppConfig):\n    name = 'core'",
+        "detail": "core.apps",
+        "documentation": {}
+    },
+    {
+        "label": "index",
+        "kind": 2,
+        "importPath": "core.views",
+        "description": "core.views",
+        "peekOfCode": "def index(request):\n    return render(request, \"index.html\")\ndef home(request):\n    return render(request, \"pages/home.html\")\ndef login_view(request):\n    return render(request, \"auth/login.html\")\ndef cadastro(request):\n    return render(request, \"auth/cadastro.html\")\ndef materias(request):\n    return render(request, \"pages/materias.html\")",
+        "detail": "core.views",
+        "documentation": {}
+    },
+    {
+        "label": "home",
+        "kind": 2,
+        "importPath": "core.views",
+        "description": "core.views",
+        "peekOfCode": "def home(request):\n    return render(request, \"pages/home.html\")\ndef login_view(request):\n    return render(request, \"auth/login.html\")\ndef cadastro(request):\n    return render(request, \"auth/cadastro.html\")\ndef materias(request):\n    return render(request, \"pages/materias.html\")\ndef metas(request):\n    return render(request, \"pages/metas.html\")",
+        "detail": "core.views",
+        "documentation": {}
+    },
+    {
+        "label": "login_view",
+        "kind": 2,
+        "importPath": "core.views",
+        "description": "core.views",
+        "peekOfCode": "def login_view(request):\n    return render(request, \"auth/login.html\")\ndef cadastro(request):\n    return render(request, \"auth/cadastro.html\")\ndef materias(request):\n    return render(request, \"pages/materias.html\")\ndef metas(request):\n    return render(request, \"pages/metas.html\")\ndef configuracoes(request):\n    return render(request, \"pages/configuracoes.html\")",
+        "detail": "core.views",
+        "documentation": {}
+    },
+    {
+        "label": "cadastro",
+        "kind": 2,
+        "importPath": "core.views",
+        "description": "core.views",
+        "peekOfCode": "def cadastro(request):\n    return render(request, \"auth/cadastro.html\")\ndef materias(request):\n    return render(request, \"pages/materias.html\")\ndef metas(request):\n    return render(request, \"pages/metas.html\")\ndef configuracoes(request):\n    return render(request, \"pages/configuracoes.html\")\ndef conta(request):\n    return render(request, \"pages/conta.html\")",
+        "detail": "core.views",
+        "documentation": {}
+    },
+    {
+        "label": "materias",
+        "kind": 2,
+        "importPath": "core.views",
+        "description": "core.views",
+        "peekOfCode": "def materias(request):\n    return render(request, \"pages/materias.html\")\ndef metas(request):\n    return render(request, \"pages/metas.html\")\ndef configuracoes(request):\n    return render(request, \"pages/configuracoes.html\")\ndef conta(request):\n    return render(request, \"pages/conta.html\")",
+        "detail": "core.views",
+        "documentation": {}
+    },
+    {
+        "label": "metas",
+        "kind": 2,
+        "importPath": "core.views",
+        "description": "core.views",
+        "peekOfCode": "def metas(request):\n    return render(request, \"pages/metas.html\")\ndef configuracoes(request):\n    return render(request, \"pages/configuracoes.html\")\ndef conta(request):\n    return render(request, \"pages/conta.html\")",
+        "detail": "core.views",
+        "documentation": {}
+    },
+    {
+        "label": "configuracoes",
+        "kind": 2,
+        "importPath": "core.views",
+        "description": "core.views",
+        "peekOfCode": "def configuracoes(request):\n    return render(request, \"pages/configuracoes.html\")\ndef conta(request):\n    return render(request, \"pages/conta.html\")",
+        "detail": "core.views",
+        "documentation": {}
+    },
+    {
+        "label": "conta",
+        "kind": 2,
+        "importPath": "core.views",
+        "description": "core.views",
+        "peekOfCode": "def conta(request):\n    return render(request, \"pages/conta.html\")",
+        "detail": "core.views",
+        "documentation": {}
+    },
+    {
+        "label": "application",
+        "kind": 5,
+        "importPath": "metasestudo.asgi",
+        "description": "metasestudo.asgi",
+        "peekOfCode": "application = get_asgi_application()",
+        "detail": "metasestudo.asgi",
+        "documentation": {}
+    },
+    {
+        "label": "BASE_DIR",
+        "kind": 5,
+        "importPath": "metasestudo.settings",
+        "description": "metasestudo.settings",
+        "peekOfCode": "BASE_DIR = Path(__file__).resolve().parent.parent\n# Quick-start development settings - unsuitable for production\n# See https://docs.djangoproject.com/en/6.1/howto/deployment/checklist/\n# SECURITY WARNING: keep the secret key used in production secret!\nSECRET_KEY = 'django-insecure-nuylvk70733ooc_7=u#0t*mq2nox&=q=12riz#7!2$e%8luu7r'\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = True\nALLOWED_HOSTS = []\n# Application definition\nINSTALLED_APPS = [",
+        "detail": "metasestudo.settings",
+        "documentation": {}
+    },
+    {
+        "label": "SECRET_KEY",
+        "kind": 5,
+        "importPath": "metasestudo.settings",
+        "description": "metasestudo.settings",
+        "peekOfCode": "SECRET_KEY = 'django-insecure-nuylvk70733ooc_7=u#0t*mq2nox&=q=12riz#7!2$e%8luu7r'\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = True\nALLOWED_HOSTS = []\n# Application definition\nINSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',",
+        "detail": "metasestudo.settings",
+        "documentation": {}
+    },
+    {
+        "label": "DEBUG",
+        "kind": 5,
+        "importPath": "metasestudo.settings",
+        "description": "metasestudo.settings",
+        "peekOfCode": "DEBUG = True\nALLOWED_HOSTS = []\n# Application definition\nINSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',\n    'django.contrib.staticfiles',",
+        "detail": "metasestudo.settings",
+        "documentation": {}
+    },
+    {
+        "label": "ALLOWED_HOSTS",
+        "kind": 5,
+        "importPath": "metasestudo.settings",
+        "description": "metasestudo.settings",
+        "peekOfCode": "ALLOWED_HOSTS = []\n# Application definition\nINSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',\n    'django.contrib.staticfiles',\n    'core',",
+        "detail": "metasestudo.settings",
+        "documentation": {}
+    },
+    {
+        "label": "INSTALLED_APPS",
+        "kind": 5,
+        "importPath": "metasestudo.settings",
+        "description": "metasestudo.settings",
+        "peekOfCode": "INSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',\n    'django.contrib.staticfiles',\n    'core',\n]\nMIDDLEWARE = [",
+        "detail": "metasestudo.settings",
+        "documentation": {}
+    },
+    {
+        "label": "MIDDLEWARE",
+        "kind": 5,
+        "importPath": "metasestudo.settings",
+        "description": "metasestudo.settings",
+        "peekOfCode": "MIDDLEWARE = [\n    'django.middleware.security.SecurityMiddleware',\n    'django.contrib.sessions.middleware.SessionMiddleware',\n    'django.middleware.common.CommonMiddleware',\n    'django.middleware.csrf.CsrfViewMiddleware',\n    'django.contrib.auth.middleware.AuthenticationMiddleware',\n    'django.contrib.messages.middleware.MessageMiddleware',\n    'django.middleware.clickjacking.XFrameOptionsMiddleware',\n]\nROOT_URLCONF = 'metasestudo.urls'",
+        "detail": "metasestudo.settings",
+        "documentation": {}
+    },
+    {
+        "label": "ROOT_URLCONF",
+        "kind": 5,
+        "importPath": "metasestudo.settings",
+        "description": "metasestudo.settings",
+        "peekOfCode": "ROOT_URLCONF = 'metasestudo.urls'\nTEMPLATES = [\n    {\n        'BACKEND': 'django.template.backends.django.DjangoTemplates',\n        'DIRS': [\n            BASE_DIR / 'templates',],\n        'APP_DIRS': True,\n        'OPTIONS': {\n            'context_processors': [\n                'django.template.context_processors.request',",
+        "detail": "metasestudo.settings",
+        "documentation": {}
+    },
+    {
+        "label": "TEMPLATES",
+        "kind": 5,
+        "importPath": "metasestudo.settings",
+        "description": "metasestudo.settings",
+        "peekOfCode": "TEMPLATES = [\n    {\n        'BACKEND': 'django.template.backends.django.DjangoTemplates',\n        'DIRS': [\n            BASE_DIR / 'templates',],\n        'APP_DIRS': True,\n        'OPTIONS': {\n            'context_processors': [\n                'django.template.context_processors.request',\n                'django.contrib.auth.context_processors.auth',",
+        "detail": "metasestudo.settings",
+        "documentation": {}
+    },
+    {
+        "label": "WSGI_APPLICATION",
+        "kind": 5,
+        "importPath": "metasestudo.settings",
+        "description": "metasestudo.settings",
+        "peekOfCode": "WSGI_APPLICATION = 'metasestudo.wsgi.application'\n# Database\n# https://docs.djangoproject.com/en/6.1/ref/settings/#databases\nDATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.sqlite3',\n        'NAME': BASE_DIR / 'db.sqlite3',\n    }\n}\n# Password validation",
+        "detail": "metasestudo.settings",
+        "documentation": {}
+    },
+    {
+        "label": "DATABASES",
+        "kind": 5,
+        "importPath": "metasestudo.settings",
+        "description": "metasestudo.settings",
+        "peekOfCode": "DATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.sqlite3',\n        'NAME': BASE_DIR / 'db.sqlite3',\n    }\n}\n# Password validation\n# https://docs.djangoproject.com/en/6.1/ref/settings/#auth-password-validators\nAUTH_PASSWORD_VALIDATORS = [\n    {",
+        "detail": "metasestudo.settings",
+        "documentation": {}
+    },
+    {
+        "label": "AUTH_PASSWORD_VALIDATORS",
+        "kind": 5,
+        "importPath": "metasestudo.settings",
+        "description": "metasestudo.settings",
+        "peekOfCode": "AUTH_PASSWORD_VALIDATORS = [\n    {\n        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',\n    },\n    {\n        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',\n    },\n    {\n        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',\n    },",
+        "detail": "metasestudo.settings",
+        "documentation": {}
+    },
+    {
+        "label": "LANGUAGE_CODE",
+        "kind": 5,
+        "importPath": "metasestudo.settings",
+        "description": "metasestudo.settings",
+        "peekOfCode": "LANGUAGE_CODE = 'pt-br'\nTIME_ZONE = 'America/Sao_Paulo'\nUSE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/6.1/howto/static-files/\nSTATIC_URL = 'static/'\nSTATICFILES_DIRS = [\n    BASE_DIR / 'static',\n]",
+        "detail": "metasestudo.settings",
+        "documentation": {}
+    },
+    {
+        "label": "TIME_ZONE",
+        "kind": 5,
+        "importPath": "metasestudo.settings",
+        "description": "metasestudo.settings",
+        "peekOfCode": "TIME_ZONE = 'America/Sao_Paulo'\nUSE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/6.1/howto/static-files/\nSTATIC_URL = 'static/'\nSTATICFILES_DIRS = [\n    BASE_DIR / 'static',\n]\n# Email",
+        "detail": "metasestudo.settings",
+        "documentation": {}
+    },
+    {
+        "label": "USE_I18N",
+        "kind": 5,
+        "importPath": "metasestudo.settings",
+        "description": "metasestudo.settings",
+        "peekOfCode": "USE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/6.1/howto/static-files/\nSTATIC_URL = 'static/'\nSTATICFILES_DIRS = [\n    BASE_DIR / 'static',\n]\n# Email\n# https://docs.djangoproject.com/en/6.1/topics/email/#topic-email-configuration",
+        "detail": "metasestudo.settings",
+        "documentation": {}
+    },
+    {
+        "label": "USE_TZ",
+        "kind": 5,
+        "importPath": "metasestudo.settings",
+        "description": "metasestudo.settings",
+        "peekOfCode": "USE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/6.1/howto/static-files/\nSTATIC_URL = 'static/'\nSTATICFILES_DIRS = [\n    BASE_DIR / 'static',\n]\n# Email\n# https://docs.djangoproject.com/en/6.1/topics/email/#topic-email-configuration\nMAILERS = {",
+        "detail": "metasestudo.settings",
+        "documentation": {}
+    },
+    {
+        "label": "STATIC_URL",
+        "kind": 5,
+        "importPath": "metasestudo.settings",
+        "description": "metasestudo.settings",
+        "peekOfCode": "STATIC_URL = 'static/'\nSTATICFILES_DIRS = [\n    BASE_DIR / 'static',\n]\n# Email\n# https://docs.djangoproject.com/en/6.1/topics/email/#topic-email-configuration\nMAILERS = {\n    'default': {\n        'BACKEND': 'django.core.mail.backends.console.EmailBackend',\n    },",
+        "detail": "metasestudo.settings",
+        "documentation": {}
+    },
+    {
+        "label": "STATICFILES_DIRS",
+        "kind": 5,
+        "importPath": "metasestudo.settings",
+        "description": "metasestudo.settings",
+        "peekOfCode": "STATICFILES_DIRS = [\n    BASE_DIR / 'static',\n]\n# Email\n# https://docs.djangoproject.com/en/6.1/topics/email/#topic-email-configuration\nMAILERS = {\n    'default': {\n        'BACKEND': 'django.core.mail.backends.console.EmailBackend',\n    },\n}",
+        "detail": "metasestudo.settings",
+        "documentation": {}
+    },
+    {
+        "label": "MAILERS",
+        "kind": 5,
+        "importPath": "metasestudo.settings",
+        "description": "metasestudo.settings",
+        "peekOfCode": "MAILERS = {\n    'default': {\n        'BACKEND': 'django.core.mail.backends.console.EmailBackend',\n    },\n}",
+        "detail": "metasestudo.settings",
+        "documentation": {}
+    },
+    {
+        "label": "urlpatterns",
+        "kind": 5,
+        "importPath": "metasestudo.urls",
+        "description": "metasestudo.urls",
+        "peekOfCode": "urlpatterns = [\n    path('admin/', admin.site.urls),\n    path('', views.index, name='index'),\n    path('home/', views.home, name='home'),\n    path('login/', views.login_view, name='login'),\n    path('cadastro/', views.cadastro, name='cadastro'),\n    path('materias/', views.materias, name='materias'),\n    path('metas/', views.metas, name='metas'),\n    path('configuracoes/', views.configuracoes, name='configuracoes'),\n    path('conta/', views.conta, name='conta'),",
+        "detail": "metasestudo.urls",
+        "documentation": {}
+    },
+    {
+        "label": "application",
+        "kind": 5,
+        "importPath": "metasestudo.wsgi",
+        "description": "metasestudo.wsgi",
+        "peekOfCode": "application = get_wsgi_application()",
+        "detail": "metasestudo.wsgi",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "manage",
+        "description": "manage",
+        "peekOfCode": "def main():\n    \"\"\"Run administrative tasks.\"\"\"\n    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'metasestudo.settings')\n    try:\n        from django.core.management import execute_from_command_line\n    except ImportError as exc:\n        raise ImportError(\n            \"Couldn't import Django. Are you sure it's installed and \"\n            \"available on your PYTHONPATH environment variable? Did you \"\n            \"forget to activate a virtual environment?\"",
+        "detail": "manage",
+        "documentation": {}
+    }
+]

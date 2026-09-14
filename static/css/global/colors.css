@@ -1,0 +1,11 @@
+:root {
+    --bg: #0a0d0c;
+    --bg-soft: #0e1211;
+    --panel: #121615;
+    --border: rgba(255, 255, 255, 0.08);
+    --text: #eef1ef;
+    --text-dim: #9aa39e;
+    --mint: #7fbfa0;
+    --mint-soft: #6faf92;
+    --mint-dark: #4c8a71;
+}
