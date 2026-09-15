@@ -166,7 +166,7 @@ h1.headline {
     margin-bottom: 26px;
 }
 
-h1.headline .accent {
+h1.headline .destaque {
     color: var(--mint);
     display: block;
 }
@@ -209,7 +209,7 @@ h1.headline .accent {
     flex-shrink: 0;
 }
 
-.hint {
+.dica {
     font-size: 13.5px;
     color: var(--text-dim);
     padding-left: 2px;

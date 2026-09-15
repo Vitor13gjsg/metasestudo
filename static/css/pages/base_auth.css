@@ -1,0 +1,246 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: url("../../images/auth-background.png");
+    background-size: 100% auto;
+    background-position: top-center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: var(--text);
+    font-family: var(--font);
+    -webkit-font-smoothing: antialiased;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.auth-shell {
+    display: grid;
+    grid-template-columns: minmax(360px, 560px) 1fr;
+    min-height: 100vh;
+}
+
+/* esquerda */
+
+.auth-panel {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 48px 64px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 19px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+
+.brand svg {
+    flex-shrink: 0;
+    color: var(--mint);
+}
+
+.brand .brand-accent {
+    color: var(--mint);
+    font-weight: 600;
+}
+
+.auth-panel-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 420px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 40px 0;
+}
+
+.titulo-auth {
+    font-size: 34px;
+    line-height: 1.22;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    margin: 0 0 14px;
+    color: var(--text);
+}
+
+.titulo-auth .destaque {
+    color: var(--mint);
+}
+
+.subtitulo-auth {
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--text-dim);
+    margin: 0 0 32px;
+    max-width: 40ch;
+}
+
+.campo {
+    position: relative;
+    margin-bottom: 14px;
+}
+
+.campo input {
+    width: 100%;
+    background: var(--field);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 15px 46px 15px 46px;
+    font-family: var(--font);
+    font-size: 14.5px;
+    color: var(--text);
+    outline: none;
+    transition: border-color .15s ease, background .15s ease;
+}
+
+.campo input::placeholder {
+    color: var(--text-dim);
+}
+
+.campo input:focus {
+    border-color: var(--mint);
+    background: var(--field-focus);
+}
+
+.icone-campo {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-dim);
+    pointer-events: none;
+    display: flex;
+}
+
+.alternar-campo {
+    position: absolute;
+    right: 13px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    padding: 6px;
+    cursor: pointer;
+    color: var(--text-dim);
+    display: flex;
+    border-radius: 6px;
+}
+
+.alternar-campo:hover {
+    color: var(--text-mid);
+}
+
+.alternar-campo:focus-visible,
+.campo input:focus-visible,
+.btn-primary:focus-visible,
+.alternar-auth a:focus-visible {
+    outline: 2px solid var(--mint);
+    outline-offset: 2px;
+}
+
+.form-row-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 2px 0 22px;
+    font-size: 13px;
+}
+
+.linha-selecao {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-dim);
+}
+
+.linha-selecao input {
+    accent-color: var(--mint);
+}
+
+.link-muted {
+    color: var(--text-dim);
+    transition: color .15s ease;
+}
+
+.link-muted:hover {
+    color: var(--mint);
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: var(--radius-md);
+    background: linear-gradient(180deg, var(--mint), var(--mint-dark));
+    color: var(--on-mint);
+    font-family: var(--font);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    cursor: pointer;
+    transition: filter .15s ease, transform .1s ease;
+}
+
+.btn-primary:hover {
+    filter: brightness(1.06);
+}
+
+.btn-primary:active {
+    transform: translateY(1px);
+}
+
+.field-error {
+    color: var(--danger);
+    font-size: 12.5px;
+    margin: -6px 0 12px 4px;
+}
+
+.form-alert {
+    background: var(--danger-soft);
+    border: 1px solid var(--danger-border);
+    color: var(--danger-text);
+    font-size: 13px;
+    border-radius: var(--radius-md);
+    padding: 12px 14px;
+    margin-bottom: 18px;
+}
+
+.alternar-auth {
+    text-align: center;
+    margin-top: 22px;
+    font-size: 13.5px;
+    color: var(--text-dim);
+}
+
+.alternar-auth a {
+    color: var(--text-mid);
+    font-weight: 600;
+    border-bottom: 1px solid var(--border);
+}
+
+.alternar-auth a:hover {
+    color: var(--mint);
+    border-color: var(--mint);
+}
+
+.auth-footnote {
+    font-size: 12px;
+    color: var(--text-dim);
+    opacity: .7;
+}
+
+/* direita */
+
+.auth-visual {
+    position: relative;
+    overflow: hidden;
+}

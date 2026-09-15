@@ -2,10 +2,19 @@
     --bg: #0a0d0c;
     --bg-soft: #0e1211;
     --panel: #121615;
+    --field: #101413;
+    --field-focus: #162019;
     --border: rgba(255, 255, 255, 0.08);
+    --border-soft: rgba(255, 255, 255, 0.06);
     --text: #eef1ef;
+    --text-mid: #c4cec8;
     --text-dim: #9aa39e;
     --mint: #7fbfa0;
     --mint-soft: #6faf92;
     --mint-dark: #4c8a71;
+    --danger: #e2837a;
+    --danger-soft: rgba(226, 131, 122, 0.1);
+    --danger-border: rgba(226, 131, 122, 0.35);
+    --danger-text: #f0a89f;
+    --on-mint: #0a120d;
 }

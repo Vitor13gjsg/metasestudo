@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br" translate="no">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      {% block title %}
+        MetaEstudo
+      {% endblock %}
+    </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'css/global/reset.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/global/colors.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/global/typography.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/global/variables.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/pages/base_auth.css' %}" />
+    {% block extra_css %}
+      <link rel="stylesheet" href="{% static 'css/pages/login.css' %}" />
+      <link rel="stylesheet" href="{% static 'css/pages/base_auth.css' %}" />
+    {% endblock %}
+  </head>
+  <body>
+    <div class="auth-shell">
+      <!-- LEFT: AUTH PANEL -->
+      <section class="auth-panel">
+        <a href="{% url 'home' %}" class="brand">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 6.5c-1.8-1.3-4.2-2-6.5-2-1 0-2 .13-3 .4v13.6c1-.27 2-.4 3-.4 2.3 0 4.7.7 6.5 2 1.8-1.3 4.2-2 6.5-2 1 0 2 .13 3 .4V4.9c-1-.27-2-.4-3-.4-2.3 0-4.7.7-6.5 2Z" />
+            <path d="M12 6.5v13.6" />
+          </svg>Meta<span class="brand-accent">Estudo</span>
+        </a>
+
+        <div class="auth-panel-body">
+          {% block auth_content %}
+            
+          {% endblock %}
+        </div>
+
+      </section>
+
+      <!-- RIGHT: VISUAL PANEL -->
+      <aside class="auth-visual"></aside>
+    </div>
+
+    {% block extra_js %}
+
+    {% endblock %}
+  </body>
+</html>
