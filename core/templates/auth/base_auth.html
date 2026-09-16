@@ -17,8 +17,7 @@
     <link rel="stylesheet" href="{% static 'css/global/variables.css' %}" />
     <link rel="stylesheet" href="{% static 'css/pages/base_auth.css' %}" />
     {% block extra_css %}
-      <link rel="stylesheet" href="{% static 'css/pages/login.css' %}" />
-      <link rel="stylesheet" href="{% static 'css/pages/base_auth.css' %}" />
+    
     {% endblock %}
   </head>
   <body>
@@ -43,6 +42,9 @@
       <!-- RIGHT: VISUAL PANEL -->
       <aside class="auth-visual"></aside>
     </div>
+
+    <script src="{% static 'js/pages/base_auth.js' %}"></script>
+    <script src="{% static 'js/global/themes.js' %}"></script>
 
     {% block extra_js %}
 

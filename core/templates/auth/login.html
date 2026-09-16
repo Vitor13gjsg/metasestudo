@@ -1,17 +1,16 @@
-{% extends "auth/base_auth.html" %}
+{% extends 'auth/base_auth.html' %}
 {% load static %}
 
-{% block title %}Entrar · MetaEstudo{% endblock %}
+{% block title %}
+  Entrar · MetaEstudo
+{% endblock %}
 
 {% block auth_content %}
-
   <h1 class="titulo-auth">
-    Grandes objetivos<br>começam com<br>
+    Grandes objetivos<br />começam com<br />
     <span class="destaque">pequenos hábitos.</span>
   </h1>
-  <p class="subtitulo-auth">
-    Organize seus estudos, acompanhe seu progresso e construa o futuro que você quer.
-  </p>
+  <p class="subtitulo-auth">Organize seus estudos, acompanhe seu progresso e construa o futuro que você quer.</p>
 
   <form method="post" action="{% url 'login' %}" novalidate>
     {% csrf_token %}
@@ -19,34 +18,47 @@
     <div class="campo">
       <span class="icone-campo">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M20 21a8 8 0 0 0-16 0"/>
-          <circle cx="12" cy="7" r="4"/>
+          <path d="M20 21a8 8 0 0 0-16 0" />
+          <circle cx="12" cy="7" r="4" />
         </svg>
       </span>
-      <input>
+
+      <input 
+      type="email" 
+      name="email" 
+      id="id_email" 
+      placeholder="E-mail" 
+      autocomplete="email" 
+      required
+      >
+
     </div>
 
     <div class="campo">
       <span class="icone-campo">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="4" y="10" width="16" height="10" rx="2"/>
-          <path d="M8 10V7a4 4 0 0 1 8 0v3"/>
+          <rect x="4" y="10" width="16" height="10" rx="2" />
+          <path d="M8 10V7a4 4 0 0 1 8 0v3" />
         </svg>
       </span>
-      <input>
+      <input 
+        type="password" 
+        name="password" 
+        id="id_password" 
+        placeholder="Senha" 
+        autocomplete="current-password" 
+        required
+      >
       <button type="button" class="alternar-campo" data-toggle-for="id_password">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"/>
-          <circle cx="12" cy="12" r="3"/>
+          <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z" />
+          <circle cx="12" cy="12" r="3" />
         </svg>
       </button>
     </div>
 
     <div class="linha-formulario">
-      <label class="linha-selecao">
-        <input type="checkbox" name="remember">
-        Lembrar-me
-      </label>
+      <label class="linha-selecao"><input type="checkbox" name="remember" />Lembrar-me</label>
       <a href="#" class="link-muted">Esqueceu a senha?</a>
     </div>
 
@@ -56,18 +68,5 @@
   <div class="alternar-auth">
     Ainda não tem conta? <a href="{% url 'cadastro' %}">Criar conta</a>
   </div>
-
 {% endblock %}
 
-{% block extra_js %}
-<script>
-  document.querySelectorAll('[data-toggle-for]').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      var input = document.getElementById(btn.getAttribute('data-toggle-for'));
-      var isPassword = input.type === 'password';
-      input.type = isPassword ? 'text' : 'password';
-      btn.setAttribute('aria-label', isPassword ? 'Ocultar senha' : 'Mostrar senha');
-    });
-  });
-</script>
-{% endblock %}

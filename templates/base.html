@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>
+      {% block title %}
+        MetaEstudo
+      {% endblock %}
+    </title>
+
+    <link rel="stylesheet" href="{% static 'css/global/reset.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/global/colors.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/global/typography.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/global/variables.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/pages/base.css' %}" />
+
+    {% block extra_css %}
+
+    {% endblock %}
+  </head>
+
+  <body>
+    {% block content %}
+
+    {% endblock %}
+
+    {% block extra_js %}
+
+    {% endblock %}
+  </body>
+</html>

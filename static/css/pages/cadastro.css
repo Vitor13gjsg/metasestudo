@@ -1,0 +1,14 @@
+.campo-com-erro input {
+	border-color: var(--danger);
+	background: var(--danger-soft);
+}
+
+.campo-com-erro input:focus {
+	border-color: var(--danger);
+	box-shadow: 0 0 0 3px var(--danger-soft);
+}
+
+.campo .field-error {
+	margin: 7px 4px 0;
+	line-height: 1.4;
+}

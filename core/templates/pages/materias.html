@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Em construção · MetaEstudo
+{% endblock %}
+
+{% block extra_css %}
+  <style>
+    .construcao {
+      width: min(90%, 700px);
+      text-align: center;
+      padding: 40px 20px;
+      margin: 0 auto;
+      min-height: 100vh;
+    
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .icone {
+      width: 90px;
+      height: 90px;
+      margin: 0 auto 35px;
+    
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    
+      border: 3px solid #f2b705;
+      border-radius: 50%;
+    
+      color: #f2b705;
+      font-size: 42px;
+    }
+    
+    .construcao h1 {
+      font-size: clamp(2.5rem, 7vw, 5rem);
+      line-height: 0.95;
+      font-weight: 300;
+      letter-spacing: -2px;
+    }
+    
+    .construcao h1 strong {
+      display: block;
+      margin-top: 8px;
+    
+      color: #f2b705;
+      font-weight: 800;
+    }
+    
+    .linha {
+      width: 70px;
+      height: 4px;
+    
+      margin: 30px auto;
+    
+      background: #f2b705;
+      border-radius: 10px;
+    }
+    
+    .mensagem {
+      max-width: 520px;
+      margin: 0 auto;
+    
+      color: #c7c7c7;
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+    
+    .voltar {
+      display: inline-block;
+      margin-top: 55px;
+    
+      color: #888;
+      text-decoration: none;
+    
+      font-size: 0.95rem;
+    
+      transition: color 0.2s ease;
+    }
+    
+    .voltar:hover {
+      color: #f2b705;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <main class="construcao">
+    <div class="icone">⚒</div>
+
+    <h1>
+      SITE EM
+      <strong>CONSTRUÇÃO</strong>
+    </h1>
+
+    <div class="linha"></div>
+
+    <p class="mensagem">Estamos trabalhando para trazer uma experiência ainda melhor para você.</p>
+
+    <a href="{% url 'index' %}" class="voltar">← Voltar para o início</a>
+  </main>
+{% endblock %}

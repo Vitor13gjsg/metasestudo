@@ -5,6 +5,11 @@
   Criar conta · MetaEstudo
 {% endblock %}
 
+{% block extra_css %}
+  {{ block.super }}
+  <link rel="stylesheet" href="{% static 'css/pages/cadastro.css' %}" />
+{% endblock %}
+
 {% block auth_content %}
   <h1 class="titulo-auth">
     Comece hoje a construir<br />
@@ -15,7 +20,15 @@
   <form method="post" action="{% url 'cadastro' %}" novalidate>
     {% csrf_token %}
 
-    <div class="campo">
+    {% if form.non_field_errors %}
+      <div class="form-alert" role="alert">
+        {% for error in form.non_field_errors %}
+          {{ error }}
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <div class="campo{% if form.username.errors %} campo-com-erro{% endif %}">
       <span class="icone-campo">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
           <path d="M20 21a8 8 0 0 0-16 0" />
@@ -29,12 +42,16 @@
       id="id_username" 
       placeholder="Nome de usuário" 
       autocomplete="username" 
-      required 
+      required
+      {% if form.username.errors %}aria-invalid="true"{% endif %}
       value="{{ form.username.value|default_if_none:'' }}">
 
+      {% for error in form.username.errors %}
+        <p class="field-error" role="alert">{{ error }}</p>
+      {% endfor %}
     </div>
 
-    <div class="campo">
+    <div class="campo{% if form.email.errors %} campo-com-erro{% endif %}">
       <span class="icone-campo">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
           <rect x="3" y="5" width="18" height="14" rx="2" />
@@ -48,12 +65,16 @@
       id="id_email" 
       placeholder="E-mail" 
       autocomplete="email" 
-      required 
+      required
+      {% if form.email.errors %}aria-invalid="true"{% endif %}
       value="{{ form.email.value|default_if_none:'' }}">
 
+      {% for error in form.email.errors %}
+        <p class="field-error" role="alert">{{ error }}</p>
+      {% endfor %}
     </div>
 
-    <div class="campo">
+    <div class="campo{% if form.password1.errors %} campo-com-erro{% endif %}">
       <span class="icone-campo">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
           <rect x="4" y="10" width="16" height="10" rx="2" />
@@ -67,17 +88,22 @@
         id="id_password1"
         placeholder="Senha"
         autocomplete="new-password"
-        required>
+        required
+        {% if form.password1.errors %}aria-invalid="true"{% endif %}>
 
-      <button type="button" class="alternar-campo" data-toggle-for="id_password1" aria-label="Mostrar senha">
+      <button type="button" class="alternar-campo" data-toggle-for="id_password1">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
           <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z" />
           <circle cx="12" cy="12" r="3" />
         </svg>
       </button>
+
+      {% for error in form.password1.errors %}
+        <p class="field-error" role="alert">{{ error }}</p>
+      {% endfor %}
     </div>
 
-    <div class="campo">
+    <div class="campo{% if form.password2.errors %} campo-com-erro{% endif %}">
       <span class="icone-campo">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
           <rect x="4" y="10" width="16" height="10" rx="2" />
@@ -91,14 +117,19 @@
         id="id_password2"
         placeholder="Confirmar senha"
         autocomplete="new-password"
-        required>
+        required
+        {% if form.password2.errors %}aria-invalid="true"{% endif %}>
 
-      <button type="button" class="alternar-campo" data-toggle-for="id_password2" aria-label="Mostrar senha">
+      <button type="button" class="alternar-campo" data-toggle-for="id_password2">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
           <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z" />
           <circle cx="12" cy="12" r="3" />
         </svg>
       </button>
+
+      {% for error in form.password2.errors %}
+        <p class="field-error" role="alert">{{ error }}</p>
+      {% endfor %}
     </div>
 
     <div class="form-row-between" style="margin-top:2px;">
@@ -111,17 +142,4 @@
   <div class="alternar-auth">
     Já tem uma conta? <a href="{% url 'login' %}">Entrar</a>
   </div>
-{% endblock %}
-
-{% block extra_js %}
-  <script>
-    document.querySelectorAll('[data-toggle-for]').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        var input = document.getElementById(btn.getAttribute('data-toggle-for'))
-        var isPassword = input.type === 'password'
-        input.type = isPassword ? 'text' : 'password'
-        btn.setAttribute('aria-label', isPassword ? 'Ocultar senha' : 'Mostrar senha')
-      })
-    })
-  </script>
 {% endblock %}
