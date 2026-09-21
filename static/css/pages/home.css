@@ -1,162 +1,194 @@
 /* Estilos do dashboard; a estrutura geral está em base.css. */
 .page-heading {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  margin-bottom: 22px;
-  flex-wrap: wrap;
-  gap: 12px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 22px;
+    flex-wrap: wrap;
+    gap: 12px;
 }
 
-.page-heading h1 { margin: 0 0 4px; font-size: var(--font-size-xl); }
-.page-heading p { margin: 0; color: var(--text-dim); font-size: var(--font-size-sm); }
+.page-heading h1 {
+    margin: 0 0 4px;
+    font-size: var(--font-size-xl);
+}
+
+.page-heading p {
+    margin: 0;
+    color: var(--text-dim);
+    font-size: var(--font-size-sm);
+}
 
 .stat-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  margin-bottom: 16px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 16px;
 }
 
 .card {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 18px 20px;
-  box-shadow: var(--shadow);
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    box-shadow: var(--shadow);
 }
 
 .stat-card__top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
 }
 
 .stat-card__label {
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-bold);
-  letter-spacing: .06em;
-  text-transform: uppercase;
-  color: var(--text-dim);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--text-dim);
 }
 
 .stat-card__icon {
-  width: 32px;
-  height: 32px;
-  border-radius: 9px;
-  background: var(--mint-soft);
-  color: var(--mint-dark);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 9px;
+    background: var(--mint-soft);
+    color: var(--mint-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-[data-theme="dark"] .stat-card__icon { color: var(--mint); }
-.stat-card__icon svg { width: 16px; height: 16px; }
+[data-theme="dark"] .stat-card__icon {
+    color: var(--mint);
+}
+
+.stat-card__icon svg {
+    width: 16px;
+    height: 16px;
+}
 
 .stat-card__value {
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-extrabold);
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-extrabold);
 }
 
 .stat-card__delta {
-  margin-top: 6px;
-  font-size: var(--font-size-xs);
-  color: var(--mint-dark);
-  display: flex;
-  align-items: center;
-  gap: 4px;
+    margin-top: 6px;
+    font-size: var(--font-size-xs);
+    color: var(--mint-dark);
+    display: flex;
+    align-items: center;
+    gap: 4px;
 }
 
-[data-theme="dark"] .stat-card__delta { color: var(--mint); }
+[data-theme="dark"] .stat-card__delta {
+    color: var(--mint);
+}
 
 .row-2 {
-  display: grid;
-  grid-template-columns: 1.4fr 1fr;
-  gap: 16px;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 16px;
 }
 
 .card__header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
 }
 
-.card__header h3 { margin: 0; font-size: var(--font-size-nav); }
+.card__header h3 {
+    margin: 0;
+    font-size: var(--font-size-nav);
+}
 
 .card__header span.muted {
-  font-size: var(--font-size-xs);
-  color: var(--text-dim);
-  text-transform: uppercase;
-  letter-spacing: .05em;
-  font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-xs);
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    font-weight: var(--font-weight-bold);
 }
 
 .progress-value {
-  font-size: var(--font-size-stat);
-  font-weight: var(--font-weight-extrabold);
-  margin-bottom: 10px;
+    font-size: var(--font-size-stat);
+    font-weight: var(--font-weight-extrabold);
+    margin-bottom: 10px;
 }
 
 .progress-track {
-  height: 10px;
-  border-radius: 999px;
-  background: var(--bg-soft);
-  overflow: hidden;
-  border: 1px solid var(--border);
+    height: 10px;
+    border-radius: 999px;
+    background: var(--bg-soft);
+    overflow: hidden;
+    border: 1px solid var(--border);
 }
 
 .progress-fill {
-  height: 100%;
-  border-radius: 999px;
-  background: linear-gradient(90deg, var(--mint), var(--gradient-end));
-  transition: width .6s ease;
+    height: 100%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--mint), var(--gradient-end));
+    transition: width .6s ease;
 }
 
 .progress-caption {
-  margin-top: 8px;
-  font-size: var(--font-size-xs);
-  color: var(--text-dim);
+    margin-top: 8px;
+    font-size: var(--font-size-xs);
+    color: var(--text-dim);
 }
 
 .goal-title {
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-bold);
-  margin: 0 0 6px;
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    margin: 0 0 6px;
 }
 
 .goal-meta {
-  font-size: var(--font-size-caption);
-  color: var(--text-dim);
-  margin-bottom: 14px;
+    font-size: var(--font-size-caption);
+    color: var(--text-dim);
+    margin-bottom: 14px;
 }
 
-.mini-progress { display: flex; align-items: center; gap: 10px; }
-.mini-progress .progress-track { flex: 1; }
+.mini-progress {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.mini-progress .progress-track {
+    flex: 1;
+}
 
 .mini-progress span {
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-bold);
-  color: var(--mint-dark);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    color: var(--mint-dark);
 }
 
-[data-theme="dark"] .mini-progress span { color: var(--mint); }
+[data-theme="dark"] .mini-progress span {
+    color: var(--mint);
+}
 
 .chart-bars {
-  display: flex;
-  align-items: flex-end;
-  gap: 10px;
-  height: 140px;
-  padding-top: 10px;
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    height: 140px;
+    padding-top: 10px;
 }
 
 .empty-state {
-  width: 100%;
-  color: var(--text-dim);
-  font-size: var(--font-size-sm);
-  text-align: center;
+    width: 100%;
+    color: var(--text-dim);
+    font-size: var(--font-size-sm);
+    text-align: center;
 }
 
-.goal-list { display: flex; flex-direction: column; gap: 12px; }
+.goal-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}

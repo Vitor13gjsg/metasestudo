@@ -23,7 +23,7 @@
     {% csrf_token %}
 
     {% if form.non_field_errors %}
-      <!-- Erros gerais não pertencem a um campo específico. -->
+      <!-- Mensagens gerais ficam no topo porque não pertencem a um campo só. -->
       <div class="form-alert" role="alert">
         {% for error in form.non_field_errors %}
           {{ error }}
@@ -31,7 +31,7 @@
       </div>
     {% endif %}
 
-    <!-- Cada campo recebe campo-com-erro quando o Django devolve uma validação inválida. -->
+    <!-- campo-com-erro aparece quando o Django devolve erro para este campo. -->
     <div class="campo{% if form.username.errors %} campo-com-erro{% endif %}">
       <span class="icone-campo">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">

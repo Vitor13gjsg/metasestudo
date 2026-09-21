@@ -25,15 +25,7 @@
         </svg>
       </span>
 
-      <input 
-      type="email" 
-      name="email" 
-      id="id_email" 
-      placeholder="E-mail" 
-      autocomplete="email" 
-      required
-      >
-
+      <input type="email" name="email" id="id_email" placeholder="E-mail" autocomplete="email" required />
     </div>
 
     <div class="campo">
@@ -43,14 +35,7 @@
           <path d="M8 10V7a4 4 0 0 1 8 0v3" />
         </svg>
       </span>
-      <input 
-        type="password" 
-        name="password" 
-        id="id_password" 
-        placeholder="Senha" 
-        autocomplete="current-password" 
-        required
-      >
+      <input type="password" name="password" id="id_password" placeholder="Senha" autocomplete="current-password" required />
       <button type="button" class="alternar-campo" data-toggle-for="id_password">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
           <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z" />
@@ -72,4 +57,3 @@
     Ainda não tem conta? <a href="{% url 'cadastro' %}">Criar conta</a>
   </div>
 {% endblock %}
-

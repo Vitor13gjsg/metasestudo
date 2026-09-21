@@ -25,13 +25,6 @@
   </div>
 
   <div class="app-header__actions">
-    <button class="icon-btn" aria-label="Notificações">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9" />
-        <path d="M13.73 21a2 2 0 0 1-3.46 0" />
-      </svg>
-    </button>
-
     <button id="theme-toggle" class="theme-toggle" aria-label="Alternar tema claro/escuro" aria-pressed="false">
       <span class="theme-toggle__thumb">
         <!-- ícone sol (modo claro ativo) -->
@@ -49,8 +42,6 @@
       </span>
     </button>
 
-    <a class="avatar" href="{% url 'conta' %}" title="Abrir minha conta" aria-label="Abrir minha conta">
-      {{ request.user.first_name|default:request.user.username|first|upper }}
-    </a>
+    <a class="avatar" href="{% url 'conta' %}" title="Abrir minha conta" aria-label="Abrir minha conta">{{ request.user.first_name|default:request.user.username|first|upper }}</a>
   </div>
 </header>
