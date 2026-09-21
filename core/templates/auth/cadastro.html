@@ -6,11 +6,13 @@
 {% endblock %}
 
 {% block extra_css %}
+  {# cadastro.css traz somente o destaque visual dos campos com erro. #}
   {{ block.super }}
   <link rel="stylesheet" href="{% static 'css/pages/cadastro.css' %}" />
 {% endblock %}
 
 {% block auth_content %}
+  {# Os erros são renderizados próximos ao campo para facilitar a correção do cadastro. #}
   <h1 class="titulo-auth">
     Comece hoje a construir<br />
     <span class="destaque">seus próximos hábitos.</span>
@@ -21,6 +23,7 @@
     {% csrf_token %}
 
     {% if form.non_field_errors %}
+      <!-- Erros gerais não pertencem a um campo específico. -->
       <div class="form-alert" role="alert">
         {% for error in form.non_field_errors %}
           {{ error }}
@@ -28,6 +31,7 @@
       </div>
     {% endif %}
 
+    <!-- Cada campo recebe campo-com-erro quando o Django devolve uma validação inválida. -->
     <div class="campo{% if form.username.errors %} campo-com-erro{% endif %}">
       <span class="icone-campo">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">

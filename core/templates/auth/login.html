@@ -6,12 +6,14 @@
 {% endblock %}
 
 {% block auth_content %}
+  {# O login compartilha a estrutura e os estilos do cadastro através de base_auth.html. #}
   <h1 class="titulo-auth">
     Grandes objetivos<br />começam com<br />
     <span class="destaque">pequenos hábitos.</span>
   </h1>
   <p class="subtitulo-auth">Organize seus estudos, acompanhe seu progresso e construa o futuro que você quer.</p>
 
+  <!-- novalidate deixa as mensagens de validação sob controle do Django. -->
   <form method="post" action="{% url 'login' %}" novalidate>
     {% csrf_token %}
 
@@ -57,6 +59,7 @@
       </button>
     </div>
 
+    <!-- Opções secundárias ficam na mesma linha para não competir com o botão principal. -->
     <div class="linha-formulario">
       <label class="linha-selecao"><input type="checkbox" name="remember" />Lembrar-me</label>
       <a href="#" class="link-muted">Esqueceu a senha?</a>

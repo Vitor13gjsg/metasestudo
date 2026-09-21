@@ -3,9 +3,9 @@ html {
 }
 
 body {
-    background: radial-gradient(ellipse 1200px 600px at 20% -10%, rgba(127, 191, 160, 0.06), transparent 60%), var(--bg);
+    background: radial-gradient(ellipse 1200px 600px at 20% -10%, var(--mint-glow), transparent 60%), var(--bg);
     color: var(--text);
-    font-family: -apple-system, "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: var(--font-family);
     -webkit-font-smoothing: antialiased;
     min-height: 100vh;
 }
@@ -39,8 +39,8 @@ header {
     display: flex;
     align-items: center;
     gap: 10px;
-    font-size: 19px;
-    font-weight: 600;
+    font-size: var(--font-size-brand);
+    font-weight: var(--font-weight-semibold);
     letter-spacing: -0.01em;
     white-space: nowrap;
 }
@@ -51,7 +51,7 @@ header {
 
 .brand .estudo {
     color: var(--mint);
-    font-weight: 600;
+    font-weight: var(--font-weight-semibold);
 }
 
 .brand svg {
@@ -66,7 +66,7 @@ nav.primary-nav {
 
 nav.primary-nav a {
     position: relative;
-    font-size: 15px;
+    font-size: var(--font-size-nav);
     color: var(--text-dim);
     padding-bottom: 6px;
     transition: color 0.2s ease;
@@ -113,7 +113,7 @@ nav.primary-nav a.active::after {
 
 .icon-btn:hover {
     color: var(--text);
-    background: rgba(255, 255, 255, 0.04);
+    background: var(--surface-hover);
 }
 
 .icon-btn.spin svg {
@@ -125,17 +125,17 @@ nav.primary-nav a.active::after {
 }
 
 .btn-entrar {
-    border: 1px solid rgba(127, 191, 160, 0.4);
+    border: 1px solid var(--mint-border);
     color: var(--mint);
     padding: 9px 22px;
     border-radius: 10px;
-    font-size: 14.5px;
-    font-weight: 500;
+    font-size: var(--font-size-body-sm);
+    font-weight: var(--font-weight-medium);
     transition: background 0.2s ease, border-color 0.2s ease;
 }
 
 .btn-entrar:hover {
-    background: rgba(127, 191, 160, 0.08);
+    background: var(--mint-surface);
     border-color: var(--mint);
 }
 
@@ -150,17 +150,17 @@ nav.primary-nav a.active::after {
 }
 
 .eyebrow {
-    font-size: 13px;
+    font-size: var(--font-size-caption);
     color: var(--mint);
     letter-spacing: 0.14em;
     margin-bottom: 18px;
-    font-weight: 600;
+    font-weight: var(--font-weight-semibold);
 }
 
 h1.headline {
-    font-size: 58px;
-    line-height: 1.08;
-    font-weight: 600;
+    font-size: var(--font-size-display);
+    line-height: var(--line-height-tight);
+    font-weight: var(--font-weight-semibold);
     letter-spacing: -0.02em;
     color: var(--text);
     margin-bottom: 26px;
@@ -172,8 +172,8 @@ h1.headline .destaque {
 }
 
 .sub {
-    font-size: 17px;
-    line-height: 1.65;
+    font-size: var(--font-size-body-lg);
+    line-height: var(--line-height-relaxed);
     color: var(--text-dim);
     max-width: 480px;
     margin-bottom: 34px;
@@ -191,18 +191,18 @@ h1.headline .destaque {
     align-items: center;
     gap: 10px;
     background: linear-gradient(135deg, var(--mint-soft), var(--mint-dark));
-    color: #08130f;
-    font-weight: 600;
-    font-size: 15.5px;
+    color: var(--on-mint);
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-body-sm);
     padding: 15px 28px;
     border-radius: 12px;
-    box-shadow: 0 12px 30px -12px rgba(111, 175, 146, 0.55);
+    box-shadow: 0 12px 30px -12px var(--mint-soft);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .btn-cta:hover {
     transform: translateY(-2px);
-    box-shadow: 0 16px 34px -12px rgba(111, 175, 146, 0.7);
+    box-shadow: 0 16px 34px -12px var(--mint-soft);
 }
 
 .btn-cta svg {
@@ -210,7 +210,7 @@ h1.headline .destaque {
 }
 
 .dica {
-    font-size: 13.5px;
+    font-size: var(--font-size-body-sm);
     color: var(--text-dim);
     padding-left: 2px;
 }
@@ -243,15 +243,15 @@ h1.headline .destaque {
 }
 
 .feature-copy h3 {
-    font-size: 16.5px;
-    font-weight: 600;
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-semibold);
     margin-bottom: 5px;
     color: var(--text);
 }
 
 .feature-copy p {
-    font-size: 14.5px;
-    line-height: 1.55;
+    font-size: var(--font-size-body-sm);
+    line-height: var(--line-height-copy);
     color: var(--text-dim);
     max-width: 340px;
 }
@@ -286,14 +286,14 @@ h1.headline .destaque {
 }
 
 .strip-item h4 {
-    font-size: 14.5px;
-    font-weight: 600;
+    font-size: var(--font-size-body-sm);
+    font-weight: var(--font-weight-semibold);
     color: var(--text);
     margin-bottom: 2px;
 }
 
 .strip-item p {
-    font-size: 13px;
+    font-size: var(--font-size-caption);
     color: var(--text-dim);
 }
 
@@ -304,10 +304,6 @@ h1.headline .destaque {
         display: none;
     }
 
-    .nav-toggle {
-        display: flex;
-    }
-
     .hero {
         grid-template-columns: 1fr;
         gap: 56px;
@@ -315,7 +311,7 @@ h1.headline .destaque {
     }
 
     h1.headline {
-        font-size: 44px;
+        font-size: var(--font-size-2xl);
     }
 
     .strip-grid {
@@ -329,11 +325,11 @@ h1.headline .destaque {
     }
 
     h1.headline {
-        font-size: 36px;
+        font-size: var(--font-size-xl);
     }
 
     .sub {
-        font-size: 15.5px;
+        font-size: var(--font-size-body-sm);
     }
 
     .strip-grid {
@@ -341,7 +337,7 @@ h1.headline .destaque {
     }
 
     .brand span.wordmark {
-        font-size: 17px;
+        font-size: var(--font-size-lg);
     }
 }
 

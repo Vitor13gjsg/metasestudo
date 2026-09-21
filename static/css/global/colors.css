@@ -1,20 +1,40 @@
 :root {
+    /* Fundos da página, painéis, cartões e campos de formulário. */
     --bg: #0a0d0c;
     --bg-soft: #0e1211;
     --panel: #121615;
     --field: #101413;
     --field-focus: #162019;
+
+    /* Linhas principais e divisórias mais discretas. */
     --border: rgba(255, 255, 255, 0.08);
     --border-soft: rgba(255, 255, 255, 0.06);
+
+    /* Texto principal e variações mais suaves para informações secundárias. */
     --text: #eef1ef;
     --text-mid: #c4cec8;
     --text-dim: #9aa39e;
+
+    /* Verde da marca: cor principal, versão suave para fundos e escura para contraste. */
     --mint: #7fbfa0;
     --mint-soft: #6faf92;
     --mint-dark: #4c8a71;
+
+    /* Cores usadas nas mensagens e nos campos com erro. */
     --danger: #e2837a;
     --danger-soft: rgba(226, 131, 122, 0.1);
     --danger-border: rgba(226, 131, 122, 0.35);
     --danger-text: #f0a89f;
+
+    /* Cores de apoio para contraste, gradientes e estados especiais. */
     --on-mint: #0a120d;
+    --mint-border: rgba(127, 191, 160, 0.4);
+    --mint-surface: rgba(127, 191, 160, 0.08);
+    --on-brand: #05221c;
+    --gradient-end: #17bfe0;
+    --accent-purple: #7c5cff;
+    --surface-dark: #1b1f26;
+    --on-surface: #ffffff;
+    --mint-glow: rgba(127, 191, 160, 0.06);
+    --surface-hover: rgba(255, 255, 255, 0.04);
 }

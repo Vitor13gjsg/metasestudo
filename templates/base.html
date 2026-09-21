@@ -1,34 +1,42 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" translate="no">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <title>
       {% block title %}
         MetaEstudo
       {% endblock %}
     </title>
-
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="{% static 'css/global/reset.css' %}" />
     <link rel="stylesheet" href="{% static 'css/global/colors.css' %}" />
     <link rel="stylesheet" href="{% static 'css/global/typography.css' %}" />
     <link rel="stylesheet" href="{% static 'css/global/variables.css' %}" />
     <link rel="stylesheet" href="{% static 'css/pages/base.css' %}" />
-
+    <link rel="stylesheet" href="{% static 'css/pages/components.css' %}" />
     {% block extra_css %}
-
     {% endblock %}
   </head>
-
   <body>
-    {% block content %}
+    <!-- O shell monta a tela autenticada com header, sidebar, conteúdo e footer. -->
+    <div class="app-shell">
+      {% include 'components/header.html' %}
+      {% include 'components/sidebar.html' %}
 
-    {% endblock %}
+      <main class="app-main">
+        {% block content %}
+        {% endblock %}
+      </main>
 
+      {% include 'components/footer.html' %}
+    </div>
+
+    <script src="{% static 'js/pages/base.js' %}"></script>
+    <script src="{% static 'js/global/themes.js' %}"></script>
     {% block extra_js %}
-
     {% endblock %}
   </body>
 </html>

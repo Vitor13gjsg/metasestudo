@@ -1,105 +1,108 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}
-  Em construção · MetaEstudo
+  Home · MetaEstudo
 {% endblock %}
 
 {% block extra_css %}
-  <style>
-    .construcao {
-      width: min(90%, 700px);
-      text-align: center;
-      padding: 40px 20px;
-      margin: 0 auto;
-      min-height: 100vh;
-    
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-    
-    .icone {
-      width: 90px;
-      height: 90px;
-      margin: 0 auto 35px;
-    
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    
-      border: 3px solid #f2b705;
-      border-radius: 50%;
-    
-      color: #f2b705;
-      font-size: 42px;
-    }
-    
-    .construcao h1 {
-      font-size: clamp(2.5rem, 7vw, 5rem);
-      line-height: 0.95;
-      font-weight: 300;
-      letter-spacing: -2px;
-    }
-    
-    .construcao h1 strong {
-      display: block;
-      margin-top: 8px;
-    
-      color: #f2b705;
-      font-weight: 800;
-    }
-    
-    .linha {
-      width: 70px;
-      height: 4px;
-    
-      margin: 30px auto;
-    
-      background: #f2b705;
-      border-radius: 10px;
-    }
-    
-    .mensagem {
-      max-width: 520px;
-      margin: 0 auto;
-    
-      color: #c7c7c7;
-      font-size: 1.1rem;
-      line-height: 1.6;
-    }
-    
-    .voltar {
-      display: inline-block;
-      margin-top: 55px;
-    
-      color: #888;
-      text-decoration: none;
-    
-      font-size: 0.95rem;
-    
-      transition: color 0.2s ease;
-    }
-    
-    .voltar:hover {
-      color: #f2b705;
-    }
-  </style>
+  <link rel="stylesheet" href="{% static 'css/pages/home.css' %}" />
 {% endblock %}
 
 {% block content %}
-  <main class="construcao">
-    <div class="icone">⚒</div>
+  <div class="page-heading">
+    <div>
+      <h1>Olá, {{ request.user.first_name|default:'estudante' }} 👋</h1>
+      <p>Aqui está o seu progresso desta semana.</p>
+    </div>
+  </div>
 
-    <h1>
-      SITE EM
-      <strong>CONSTRUÇÃO</strong>
-    </h1>
+  <!-- Cards de estatísticas: os defaults representam uma conta sem dados. -->
+  <section class="stat-grid">
+    <div class="card stat-card">
+      <div class="stat-card__top">
+        <span class="stat-card__label">Horas estudadas</span>
+        <span class="stat-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10" />
+            <polyline points="12 6 12 12 16 14" />
+          </svg>
+        </span>
+      </div>
+      <div class="stat-card__value">{{ horas_estudadas|default:'0h' }}</div>
+      <div class="stat-card__delta">Nenhum estudo registrado</div>
+    </div>
 
-    <div class="linha"></div>
+    <div class="card stat-card">
+      <div class="stat-card__top">
+        <span class="stat-card__label">Metas ativas</span>
+        <span class="stat-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+            <polyline points="22 4 12 14.01 9 11.01" />
+          </svg>
+        </span>
+      </div>
+      <div class="stat-card__value">{{ metas_ativas|default:'0' }}</div>
+      <div class="stat-card__delta">Nenhuma meta ativa</div>
+    </div>
 
-    <p class="mensagem">Estamos trabalhando para trazer uma experiência ainda melhor para você.</p>
+    <div class="card stat-card">
+      <div class="stat-card__top">
+        <span class="stat-card__label">Sequência</span>
+        <span class="stat-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z" />
+          </svg>
+        </span>
+      </div>
+      <div class="stat-card__value">{{ sequencia_dias|default:'0 dias' }}</div>
+      <div class="stat-card__delta">Nenhuma sequência iniciada</div>
+    </div>
+  </section>
 
-    <a href="{% url 'index' %}" class="voltar">← Voltar para o início</a>
-  </main>
+  <!-- Progresso da semana + Próxima meta -->
+  <section class="row-2" style="margin-bottom:16px;">
+    <div class="card">
+      <div class="card__header">
+        <h3>Progresso da semana</h3>
+        <span class="muted">Sem meta definida</span>
+      </div>
+      <div class="progress-value">{{ progresso_semana|default:'0' }}%</div>
+      <div class="progress-track">
+        <div class="progress-fill" style="width: {{ progresso_semana|default:'0' }}%;"></div>
+      </div>
+      <p class="progress-caption">Nenhum progresso registrado nesta semana.</p>
+
+      <div class="chart-bars" aria-label="Horas estudadas por dia da semana">
+        <p class="empty-state">Nenhum estudo registrado.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card__header">
+        <h3>Próxima meta</h3>
+        <span class="muted">Nenhuma meta</span>
+      </div>
+      <p class="goal-title">{{ proxima_meta.titulo|default:'Nenhuma meta cadastrada' }}</p>
+      <p class="goal-meta">{{ proxima_meta.data|default:'Crie uma meta para acompanhar seu progresso.' }}</p>
+      <div class="mini-progress">
+        <div class="progress-track">
+          <div class="progress-fill" style="width: {{ proxima_meta.progresso|default:'0' }}%;"></div>
+        </div>
+        <span>{{ proxima_meta.progresso|default:'0' }}%</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Metas de hoje -->
+  <section class="card">
+    <div class="card__header">
+      <h3>Metas de hoje</h3>
+      <span class="muted">Nenhuma meta</span>
+    </div>
+    <ul class="goal-list">
+      <li class="empty-state">Nenhuma meta para hoje.</li>
+    </ul>
+  </section>
 {% endblock %}

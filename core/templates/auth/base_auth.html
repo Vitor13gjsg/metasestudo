@@ -10,7 +10,7 @@
       {% endblock %}
     </title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="{% static 'css/global/reset.css' %}" />
     <link rel="stylesheet" href="{% static 'css/global/colors.css' %}" />
     <link rel="stylesheet" href="{% static 'css/global/typography.css' %}" />
@@ -22,7 +22,7 @@
   </head>
   <body>
     <div class="auth-shell">
-      <!-- LEFT: AUTH PANEL -->
+      <!-- Login e cadastro entram nesta coluna pelo bloco auth_content. -->
       <section class="auth-panel">
         <a href="{% url 'home' %}" class="brand">
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
@@ -39,10 +39,11 @@
 
       </section>
 
-      <!-- RIGHT: VISUAL PANEL -->
+      <!-- Área visual separada do formulário para manter o layout flexível no mobile. -->
       <aside class="auth-visual"></aside>
     </div>
 
+    <!-- base_auth.js cuida apenas dos controles comuns dos formulários, como mostrar a senha. -->
     <script src="{% static 'js/pages/base_auth.js' %}"></script>
     <script src="{% static 'js/global/themes.js' %}"></script>
 

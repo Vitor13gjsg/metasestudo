@@ -26,6 +26,6 @@ urlpatterns = [
     path('cadastro/', views.cadastro, name='cadastro'),
     path('materias/', views.materias, name='materias'),
     path('metas/', views.metas, name='metas'),
-    path('configuracoes/', views.configuracoes, name='configuracoes'),
+    path('sessoes/', views.sessoes, name='sessoes'),
     path('conta/', views.conta, name='conta'),
 ]

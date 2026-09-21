@@ -1,7 +1,5 @@
 html,
 body {
-    margin: 0;
-    padding: 0;
     height: 100%;
     background: url("../../images/auth-background.png");
     background-size: 100% auto;
@@ -9,7 +7,7 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     color: var(--text);
-    font-family: var(--font);
+    font-family: var(--font-family);
     -webkit-font-smoothing: antialiased;
 }
 
@@ -37,8 +35,8 @@ a {
     display: flex;
     align-items: center;
     gap: 10px;
-    font-size: 19px;
-    font-weight: 700;
+    font-size: var(--font-size-brand);
+    font-weight: var(--font-weight-bold);
     letter-spacing: -0.01em;
 }
 
@@ -49,7 +47,7 @@ a {
 
 .brand .brand-accent {
     color: var(--mint);
-    font-weight: 600;
+    font-weight: var(--font-weight-semibold);
 }
 
 .auth-panel-body {
@@ -64,9 +62,9 @@ a {
 }
 
 .titulo-auth {
-    font-size: 34px;
-    line-height: 1.22;
-    font-weight: 700;
+    font-size: var(--font-size-2xl);
+    line-height: var(--line-height-tight);
+    font-weight: var(--font-weight-bold);
     letter-spacing: 0.05em;
     margin: 0 0 14px;
     color: var(--text);
@@ -77,8 +75,8 @@ a {
 }
 
 .subtitulo-auth {
-    font-size: 15px;
-    line-height: 1.55;
+    font-size: var(--font-size-body-sm);
+    line-height: var(--line-height-copy);
     color: var(--text-dim);
     margin: 0 0 32px;
     max-width: 40ch;
@@ -95,8 +93,8 @@ a {
     border: 1px solid var(--border);
     border-radius: var(--radius-md);
     padding: 15px 46px 15px 46px;
-    font-family: var(--font);
-    font-size: 14.5px;
+    font-family: var(--font-family);
+    font-size: var(--font-size-body-sm);
     color: var(--text);
     outline: none;
     transition: border-color .15s ease, background .15s ease;
@@ -126,8 +124,6 @@ a {
     right: 13px;
     top: 50%;
     transform: translateY(-50%);
-    background: none;
-    border: none;
     padding: 6px;
     cursor: pointer;
     color: var(--text-dim);
@@ -152,7 +148,7 @@ a {
     align-items: center;
     justify-content: space-between;
     margin: 2px 0 22px;
-    font-size: 13px;
+    font-size: var(--font-size-caption);
 }
 
 .linha-selecao {
@@ -178,13 +174,12 @@ a {
 .btn-primary {
     width: 100%;
     padding: 15px;
-    border: none;
     border-radius: var(--radius-md);
     background: linear-gradient(180deg, var(--mint), var(--mint-dark));
     color: var(--on-mint);
-    font-family: var(--font);
-    font-size: 15px;
-    font-weight: 700;
+    font-family: var(--font-family);
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-bold);
     letter-spacing: -0.01em;
     cursor: pointer;
     transition: filter .15s ease, transform .1s ease;
@@ -200,7 +195,7 @@ a {
 
 .field-error {
     color: var(--danger);
-    font-size: 12.5px;
+    font-size: var(--font-size-caption);
     margin: -6px 0 12px 4px;
 }
 
@@ -208,7 +203,7 @@ a {
     background: var(--danger-soft);
     border: 1px solid var(--danger-border);
     color: var(--danger-text);
-    font-size: 13px;
+    font-size: var(--font-size-caption);
     border-radius: var(--radius-md);
     padding: 12px 14px;
     margin-bottom: 18px;
@@ -217,25 +212,19 @@ a {
 .alternar-auth {
     text-align: center;
     margin-top: 22px;
-    font-size: 13.5px;
+    font-size: var(--font-size-body-sm);
     color: var(--text-dim);
 }
 
 .alternar-auth a {
     color: var(--text-mid);
-    font-weight: 600;
+    font-weight: var(--font-weight-semibold);
     border-bottom: 1px solid var(--border);
 }
 
 .alternar-auth a:hover {
     color: var(--mint);
     border-color: var(--mint);
-}
-
-.auth-footnote {
-    font-size: 12px;
-    color: var(--text-dim);
-    opacity: .7;
 }
 
 /* direita */

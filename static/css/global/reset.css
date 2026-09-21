@@ -1,3 +1,4 @@
+/* Normaliza dimensões básicas antes dos estilos globais e específicos de cada página. */
 * {
     box-sizing: border-box;
     margin: 0;

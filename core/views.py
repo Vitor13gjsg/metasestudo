@@ -41,8 +41,8 @@ def materias(request):
 def metas(request):
     return render(request, "pages/metas.html")
 
-def configuracoes(request):
-    return render(request, "pages/configuracoes.html")
+def sessoes(request):
+    return render(request, "pages/sessoes.html")
 
 def conta(request):
     return render(request, "pages/conta.html")

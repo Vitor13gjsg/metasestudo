@@ -1,0 +1,52 @@
+:root {
+    /* Escala tipográfica única para evitar famílias e tamanhos divergentes entre páginas. */
+    --font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+    --font-family-display: var(--font-family);
+
+    /* Tamanhos: xs/caption para apoio, sm/body para texto, lg/xl para títulos de seção. */
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.875rem;
+    --font-size-md: 1rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.5rem;
+    --font-size-2xl: 2.125rem;
+    --font-size-display: clamp(2.75rem, 5vw, 3.625rem);
+    --font-size-brand: 1.1875rem;
+    --font-size-nav: 0.9375rem;
+    --font-size-caption: 0.8125rem;
+    --font-size-body-sm: 0.90625rem;
+    --font-size-body-lg: 1.0625rem;
+    --font-size-stat: 2rem;
+
+    /* Pesos: prefira estes nomes semânticos em vez de repetir números nos CSS de página. */
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --font-weight-extrabold: 800;
+
+    /* Entrelinhas mais fechadas em títulos e mais abertas em textos longos. */
+    --line-height-tight: 1.2;
+    --line-height-normal: 1.5;
+    --line-height-relaxed: 1.65;
+    --line-height-copy: 1.55;
+}
+
+body {
+    /* Componentes podem variar o tamanho, mas todos começam com esta base. */
+    font-family: var(--font-family);
+    font-size: var(--font-size-md);
+    line-height: var(--line-height-normal);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-family-display);
+    line-height: var(--line-height-tight);
+}
+
+/* Exemplo de uso: .titulo { font-size: var(--font-size-xl); font-weight: var(--font-weight-bold); } */
