@@ -1,7 +1,8 @@
 from django.shortcuts import redirect, render
-from metasestudo.form import CadastroForm
-from metasestudo.form import LoginForm
+from metasestudo.form import CadastroForm, LoginForm, MetaForm
 from django.contrib.auth import login as auth_login
+from django.contrib.auth.decorators import login_required  # <--- ADICIONE ESTA LINHA AQUI
+from core.models import Meta
 
 # Create your views here.
 def index(request):
@@ -39,8 +40,18 @@ def materias(request):
     return render(request, "pages/materias.html")
 
 def metas(request):
-    return render(request, "pages/metas.html")
+    if request.method == "POST":
+        form = MetaForm(request.POST)
+        if form.is_valid():
+            form.save() 
+            return redirect("metas")
+    else:
+        form = MetaForm()
 
+    lista_de_metas = Meta.objects.all().order_by('-criada_em')
+    
+    return render(request, "pages/metas.html", {"form": form, "metas": lista_de_metas})
+    return render(request, "pages/metas.html", {"form": form, "metas": lista_de_metas})
 def sessoes(request):
     return render(request, "pages/sessoes.html")
 

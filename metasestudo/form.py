@@ -1,6 +1,7 @@
 from django import forms    
 from django.contrib.auth.models import User 
 from django.contrib.auth.forms import UserCreationForm
+from core.models import Meta
 
 class CadastroForm(UserCreationForm):
     email = forms.EmailField(
@@ -65,3 +66,16 @@ class LoginForm(forms.Form):
         return cleaned_data
     def get_user(self):
         return self.user
+
+from django import forms
+from core.models import Meta
+
+
+
+class MetaForm(forms.ModelForm):
+    class Meta:
+        model = Meta
+        fields = ['titulo']
+        widgets = {
+            'titulo': forms.TextInput(attrs={'placeholder': 'Ex: Fazer 10 questões de matemática'}),
+        }
