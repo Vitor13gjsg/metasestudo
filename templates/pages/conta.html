@@ -1,0 +1,101 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha conta - MetaEstudo</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7f6;
+            margin: 0;
+            padding: 30px 16px;
+            color: #24332e;
+        }
+
+        main {
+            max-width: 600px;
+            margin: 30px auto;
+            background: white;
+            padding: 28px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px #00000012;
+        }
+
+        h1 {
+            margin-top: 0;
+        }
+
+        .opcao {
+            display: block;
+            padding: 15px;
+            margin-top: 15px;
+            border: 1px solid #dce5e1;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #176b52;
+        }
+
+        .opcao:hover {
+            background: #f0f8f4;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            margin-top: 15px;
+            border: none;
+            border-radius: 8px;
+            background: #b83232;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .mensagem {
+            padding: 10px;
+            background: #e4f5e9;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <h1>Minha conta</h1>
+
+        <p>
+            Olá, {{ request.user.username }}!
+        </p>
+
+        <p>Gerencie as opções de acesso à sua conta.</p>
+
+        {% if messages %}
+            {% for message in messages %}
+                <p class="mensagem">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+
+        <a class="opcao" href="{% url 'alterar_senha' %}">
+            <strong>Alterar senha</strong><br>
+            Atualize a senha da sua conta.
+        </a>
+
+        <form method="post" action="{% url 'sair' %}">
+            {% csrf_token %}
+            <button type="submit">Sair do login</button>
+        </form>
+
+        <form method="post" action="{% url 'sair' %}">
+            {% csrf_token %}
+            <button type="submit">Mudar de conta</button>
+        </form>
+
+        <p>
+            <a href="{% url 'home' %}">Voltar ao sistema</a>
+        </p>
+    </main>
+</body>
+</html>
