@@ -28,5 +28,8 @@ urlpatterns = [
     path('metas/', metas, name='metas'),
     path('sessoes/', sessoes, name='sessoes'),
     path('conta/', conta, name='conta'),
+    path('alterar-senha/', views.alterar_senha, name='alterar_senha'),
+    path('sair/', views.sair, name='sair'),
+]
     
 ]
