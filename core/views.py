@@ -3,7 +3,10 @@ from metasestudo.form import CadastroForm, LoginForm, MetaForm
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.decorators import login_required  # <--- ADICIONE ESTA LINHA AQUI
 from core.models import Meta
-
+from django.contrib.auth import logout
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
+from django.contrib import messages
 # Create your views here.
 def index(request):
    # if request.user.is_authenticated:
@@ -54,6 +57,8 @@ def metas(request):
     return render(request, "pages/metas.html", {"form": form, "metas": lista_de_metas})
 def sessoes(request):
     return render(request, "pages/sessoes.html")
-
+   
+@login_required(login_url="login")
 def conta(request):
     return render(request, "pages/conta.html")
+
