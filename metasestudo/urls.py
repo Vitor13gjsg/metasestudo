@@ -31,5 +31,4 @@ urlpatterns = [
     path('alterar-senha/', views.alterar_senha, name='alterar_senha'),
     path('sair/', views.sair, name='sair'),
 ]
-    
-]
+
