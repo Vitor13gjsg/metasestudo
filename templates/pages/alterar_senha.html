@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alterar senha - MetaEstudo</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7f6;
+            color: #24332e;
+            padding: 30px 16px;
+        }
+
+        main {
+            max-width: 500px;
+            margin: 30px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+        }
+
+        input {
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+            padding: 10px;
+            margin: 8px 0 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #176b52;
+            color: white;
+            border: none;
+            border-radius: 7px;
+            cursor: pointer;
+        }
+
+        .erro {
+            color: #b83232;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <h1>Alterar senha</h1>
+
+        <p>Preencha os campos abaixo para atualizar sua senha.</p>
+
+        <form method="post">
+            {% csrf_token %}
+
+            {{ form.non_field_errors }}
+
+            <p>
+                <label for="{{ form.old_password.id_for_label }}">
+                    Senha atual
+                </label>
+                {{ form.old_password }}
+                <span class="erro">
+                    {{ form.old_password.errors }}
+                </span>
+            </p>
+
+            <p>
+                <label for="{{ form.new_password1.id_for_label }}">
+                    Nova senha
+                </label>
+                {{ form.new_password1 }}
+                <span class="erro">
+                    {{ form.new_password1.errors }}
+                </span>
+            </p>
+
+            <p>
+                <label for="{{ form.new_password2.id_for_label }}">
+                    Confirme a nova senha
+                </label>
+                {{ form.new_password2 }}
+                <span class="erro">
+                    {{ form.new_password2.errors }}
+                </span>
+            </p>
+
+            <button type="submit">Salvar nova senha</button>
+        </form>
+
+        <p>
+            <a href="{% url 'conta' %}">Voltar para minha conta</a>
+        </p>
+    </main>
+</body>
+</html>
