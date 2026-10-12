@@ -62,3 +62,37 @@ def sessoes(request):
 def conta(request):
     return render(request, "pages/conta.html")
 
+@login_required(login_url="login")
+def alterar_senha(request):
+    if request.method == "POST":
+        form = PasswordChangeForm(
+            request.user,
+            request.POST
+        )
+
+        if form.is_valid():
+            usuario = form.save()
+            update_session_auth_hash(request, usuario)
+
+            messages.success(
+                request,
+                "Sua senha foi alterada com sucesso!"
+            )
+
+            return redirect("conta")
+    else:
+        form = PasswordChangeForm(request.user)
+
+    return render(
+        request,
+        "pages/alterar_senha.html",
+        {"form": form}
+    )
+   
+@login_required(login_url="login")
+def sair(request):
+    if request.method == "POST":
+        logout(request)
+        return redirect("login")
+
+    return redirect("conta")
