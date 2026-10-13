@@ -27,3 +27,7 @@
 ## Próximo
 - Criar conteúdo das páginas internas
 - Concluir as páginas: index, login e cadastro
+
+## 12/10/2026 
+- Implementação da página de usuário, tornando-se possível que o usuário consiga trocar de senha, trocar de conta e sair de longin. 
+- Responsável: Eloiza 
