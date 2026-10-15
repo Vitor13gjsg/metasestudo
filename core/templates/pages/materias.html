@@ -88,42 +88,18 @@
 {% endblock %}
 
 {% block content %}
-  <h1>Matérias</h1>
+  <main class="construcao">
+    <div class="icone">⚒</div>
 
-  <form method="POST"
-    {% csrf_token %}
+    <h1>
+      SITE EM
+      <strong>CONSTRUÇÃO</strong>
+    </h1>
 
-    <fieldset>
-      <legend>Selecionar matérias existentes:</legend>
+    <div class="linha"></div>
 
-      {% if materias_disponiveis %}
-        <ul>
-          {% for materia in materias_disponiveis %}
-            <li>
-              <!-- O 'name="materias_existentes"' e o 'value="{{ materia.id }}"' servem para a view pegar os IDs no request.POST.getlist -->
-              <label>
-                {{ materia.nome }}
-                {% if not materia.is_visivel %}
-                  <small>(Privada)</small>
-                {% endif %}
-              </label>
-            </li>
-          {% endfor %}
-        </ul>
-      {% else %}
-        <p>Não há matérias disponíveis no momento.</p>
-      {% endif %}
-    </fieldset>
+    <p class="mensagem">Estamos trabalhando para trazer uma experiência ainda melhor para você.</p>
 
-    <br>
-
-    <fieldset>
-      <legend>Ou criar uma nova matéria:</legend>
-      <input type="text" name="nova_materia_tecto" placeholder="Ex: Direito Constitucional">
-    </fieldset>
-
-    <br>
-
-    <button type="submit">Salvar Matérias</button>
-  </form>
+    <a href="{% url 'index' %}" class="voltar">← Voltar para o início</a>
+  </main>
 {% endblock %}

@@ -3,9 +3,8 @@ from django.contrib.auth import login as auth_login, logout, update_session_auth
 from django.contrib.auth.decorators import login_required 
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
-from django.db.models import Q
 
-from core.models import Meta, Materia
+from core.models import Meta
 from .forms import CadastroForm, LoginForm, MetaForm
 
 # Create your views here.
@@ -41,45 +40,7 @@ def cadastro(request):
     return render(request, "auth/cadastro.html")
 
 def materias(request):
-    if request.method == 'POST':
-        # Matérias selecionadas nas opções existentes
-        materias_selecionadas_ids = request.POST.getlist('materias_existentes')
-
-        # Texto digitado para criar uma nova matéria (se houver)
-        nova_materia_nome = request.POST.get('nova_materia_texto', '').strip()
-
-        # Identifica se o utilizador é administrador
-        is_admin = request.user.is_staff
-
-        # Vincula as matérias existentes selecionadas ao utilizador
-        materias_para_vincular = Materia.objects.filter(id__in=materias_selecionadas_ids)
-        for materia in materias_para_vincular:
-            materia.usuarios.add(request.user)
-
-        # Se o utilizador digitou uma nova matéria no campo de texto
-        if nova_materia_nome:
-            visibilidade = True if is_admin else False
-
-            nova_materia = Materia.objects.create(
-                nome=nova_materia_nome,
-                is_visivel=visibilidade,
-                criador=request.user
-            )
-
-            # Se for um utilizador normal, vincula automaticamente a ele
-            if not is_admin:
-                nova_materia.usuarios.add(request.user)
-        return redirect('materias') # Redireciona de volta para a mesma página após salvar
-    # Lógica para o GET: filtrar as matérias disponíveis para o usuário logado
-    materias_disponiveis = Materia.objects.filter(
-        Q(is_visivel=True) | Q(criador=request.user) | Q(usuario=request.user)
-    ).distinct()
-
-    context = {
-        'materias_disponiveis': materias_disponiveis
-    }
-
-    return render(request, "pages/materias.html", context)
+    return render(request, "pages/materias.html")
 
 def metas(request):
     lista_metas = Meta.objects.all()
