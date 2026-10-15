@@ -1,12 +1,12 @@
 from django.shortcuts import redirect, render
-from metasestudo.form import CadastroForm, LoginForm, MetaForm
-from django.contrib.auth import login as auth_login
-from django.contrib.auth.decorators import login_required  # <--- ADICIONE ESTA LINHA AQUI
-from core.models import Meta
-from django.contrib.auth import logout
+from django.contrib.auth import login as auth_login, logout, update_session_auth_hash
+from django.contrib.auth.decorators import login_required 
 from django.contrib.auth.forms import PasswordChangeForm
-from django.contrib.auth import update_session_auth_hash
 from django.contrib import messages
+
+from core.models import Meta
+from .forms import CadastroForm, LoginForm, MetaForm
+
 # Create your views here.
 def index(request):
    # if request.user.is_authenticated:
@@ -43,18 +43,42 @@ def materias(request):
     return render(request, "pages/materias.html")
 
 def metas(request):
-    if request.method == "POST":
-        form = MetaForm(request.POST)
-        if form.is_valid():
-            form.save() 
-            return redirect("metas")
-    else:
-        form = MetaForm()
+    lista_metas = Meta.objects.all()
+    context = {
+        'lista_metas': lista_metas
+    }
+    return render(request, 'metas.html', context)
 
-    lista_de_metas = Meta.objects.all().order_by('-criada_em')
-    
-    return render(request, "pages/metas.html", {"form": form, "metas": lista_de_metas})
-    return render(request, "pages/metas.html", {"form": form, "metas": lista_de_metas})
+def area_cadastro(request):
+    form = MetaForm(request.POST or None)
+
+    if form.is_valid():
+        form.save()
+        return redirect('metas')
+
+    context = {
+        'form': form
+    }
+    return render(request, 'area_cadastro.html', context)
+
+def area_editar(request, id):
+    meta = Meta.objects.get(pk=id)
+    form = MetaForm(request.POST or None, instance=meta)
+
+    if form.is_valid():
+        form.save()
+        return redirect('metas')
+
+    context = {
+        'form': form
+    }
+    return render(request, 'area_cadastro.html', context)
+
+def area_remover(request, id):
+    meta = Meta.objects.get(pk=id)
+    meta.delete()
+    return redirect('metas')
+
 def sessoes(request):
     return render(request, "pages/sessoes.html")
    

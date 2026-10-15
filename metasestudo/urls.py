@@ -16,7 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from core.views import *
+from core.views import (
+    index, home, login, cadastro, materias, metas,
+    area_cadastro, area_editar, area_remover, sessoes,
+    conta, alterar_senha, sair
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,6 +30,9 @@ urlpatterns = [
     path('cadastro/', cadastro, name='cadastro'),
     path('materias/', materias, name='materias'),
     path('metas/', metas, name='metas'),
+    path('area_cadastro/', area_cadastro, name='area_cadastro'),
+    path('area_editar/<int:id>/', area_editar, name='area_editar'),
+    path('area_remover/<int:id>/', area_remover, name='area_remover'),
     path('sessoes/', sessoes, name='sessoes'),
     path('conta/', conta, name='conta'),
     path('alterar-senha/', alterar_senha, name='alterar_senha'),

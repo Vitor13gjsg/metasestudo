@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="caixa">
+    <h1>Cadastrar Meta</h1>
+    
+    <form method="post">
+        {% csrf_token %}
+        
+        <div class="campos">
+            {{ form }}
+        </div>
+        
+        <button type="submit" class="botao-salvar">Salvar</button>
+    </form>
+</div>
+
+<style>
+    .caixa {
+        max-width: 400px;
+        margin: 50px auto;
+        padding: 30px;
+        background-color: #121615;
+        color: #eef1ef;
+        border-radius: 10px;
+        font-family: Arial, sans-serif;
+        text-align: center;
+    }
+
+    .caixa h1 {
+        margin-top: 0;
+        color: #7fbfa0;
+    }
+
+    .campos {
+        text-align: left;
+        margin-bottom: 20px;
+        color: #9aa39e;
+    }
+
+    .campos input {
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+        background-color: #101413;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        color: #eef1ef;
+        border-radius: 5px;
+    }
+
+    .botao-salvar {
+        width: 100%;
+        padding: 10px;
+        background-color: #7fbfa0;
+        color: #0a120d;
+        border: none;
+        border-radius: 5px;
+        font-weight: bold;
+        cursor: pointer;
+        font-size: 16px;
+    }
+</style>
+
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="caixa">
+
+    <div class="topo">
+        <h1>Suas Metas</h1>
+        <a href="{% url 'area_cadastro' %}" class="botao-cadastrar">Nova Meta</a>
+    </div>
+
+    {% for meta in lista_metas %}
+        <div class="item">
+            <p> {{ meta.titulo }}</p>
+            <div>
+                <a href="{% url 'area_editar' meta.id %}" class="link-editar">Editar</a>
+                <a href="{% url 'area_remover' meta.id %}" class="link-remover">Remover</a>
+            </div>
+        </div>
+    {% empty %}
+        <p>Nenhuma meta cadastrada ainda.</p>
+    {% endfor %}
+
+    <p><a href="{% url 'index' %}" class="link-voltar">← Voltar</a></p>
+
+</div>
+
+
+<style>
+    .caixa {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #121615;
+        color: #eef1ef;
+        border-radius: 10px;
+        font-family: Arial, sans-serif;
+    }
+
+    .topo {
+        display: flex; 
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .item {
+        background-color: #0e1211;
+        padding: 10px 15px;
+        margin-bottom: 10px;
+        border-radius: 8px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .item p {
+        margin: 0;
+    }
+
+    .botao-cadastrar {
+        background-color: #7fbfa0;
+        color: #0a120d;
+        padding: 8px 15px;
+        border-radius: 5px;
+        text-decoration: none; 
+        font-weight: bold;
+    }
+
+    .link-editar { color: #7fbfa0; text-decoration: none; margin-right: 10px; }
+    .link-remover { color: #e2837a; text-decoration: none; }
+    .link-voltar { color: #9aa39e; text-decoration: none; }
+</style>
+
+{% endblock %}
