@@ -8,41 +8,130 @@
   </a>
 
   <header class="info-heading">
-    <p class="info-eyebrow">{{ titulo }}</p>
-    <h1>Conteúdo provisório</h1>
+    <p class="info-eyebrow">MetaEstudo</p>
+    <h1>{{ titulo }}</h1>
+    <p>Conheça melhor nossa plataforma e saiba como utilizá-la.</p>
   </header>
 
-  <article class="recipe-content">
-    <div class="recipe-title-row">
-      <div>
-        <p class="info-eyebrow">Receita de bolo</p>
-        <h2>Bolo simples</h2>
-      </div>
-      <span class="recipe-time">Preparo: 45 min</span>
-    </div>
+  {% if titulo == "Privacidade" %}
+    <article>
+      <h2>Política de privacidade</h2>
+      <p>
+        A privacidade dos usuários é importante para o MetaEstudo.
+        Esta página apresenta informações gerais sobre o cuidado com
+        os dados utilizados durante o acesso à plataforma.
+      </p>
 
-    <section aria-labelledby="ingredients-title">
-      <h3 id="ingredients-title">Ingredientes</h3>
-      <ul>
-        <li>2 xícaras de farinha de trigo</li>
-        <li>1 xícara de açúcar</li>
-        <li>3 ovos</li>
-        <li>1 xícara de leite</li>
-        <li>2 colheres de sopa de manteiga</li>
-        <li>1 colher de sopa de fermento em pó</li>
-      </ul>
-    </section>
+      <h3>Informações dos usuários</h3>
+      <p>
+        Os dados informados no cadastro devem ser utilizados para
+        permitir o acesso à conta e às funcionalidades disponíveis
+        no sistema, conforme a implementação da plataforma.
+      </p>
 
-    <section aria-labelledby="preparation-title">
-      <h3 id="preparation-title">Modo de preparo</h3>
-      <ol>
-        <li>Preaqueça o forno a 180 °C e unte uma forma.</li>
-        <li>Misture os ovos, o açúcar e a manteiga até formar um creme.</li>
-        <li>Acrescente a farinha e o leite aos poucos, mexendo até a massa ficar homogênea.</li>
-        <li>Incorpore o fermento delicadamente.</li>
-        <li>Despeje a massa na forma e asse por cerca de 35 minutos.</li>
-        <li>Espere esfriar antes de desenformar e servir.</li>
-      </ol>
-    </section>
-  </article>
+      <h3>Proteção das informações</h3>
+      <p>
+        Os usuários devem proteger suas credenciais de acesso e evitar
+        compartilhar suas senhas com outras pessoas.
+      </p>
+
+      <h3>Dúvidas sobre privacidade</h3>
+      <p>
+        Em caso de dúvidas sobre o tratamento de dados, entre em contato
+        com a equipe responsável pelo projeto.
+      </p>
+    </article>
+
+  {% elif titulo == "Termos" %}
+    <article>
+      <h2>Termos de uso</h2>
+      <p>
+        O MetaEstudo é uma plataforma voltada à organização da rotina
+        de estudos, permitindo que os usuários acompanhem suas metas
+        e sessões de estudo.
+      </p>
+
+      <h3>Uso da plataforma</h3>
+      <p>
+        O usuário deve fornecer informações corretas no cadastro,
+        manter suas credenciais em segurança e utilizar o sistema
+        de maneira responsável.
+      </p>
+
+      <h3>Responsabilidades</h3>
+      <p>
+        Cada usuário é responsável pelas informações que registra
+        e pela utilização de sua própria conta.
+      </p>
+
+      <h3>Atualizações</h3>
+      <p>
+        As funcionalidades e orientações da plataforma podem ser
+        atualizadas conforme a evolução do projeto.
+      </p>
+    </article>
+
+  {% elif titulo == "Ajuda" %}
+    <article>
+      <h2>Como utilizar o MetaEstudo</h2>
+      <p>
+        Esta seção reúne orientações básicas para ajudar você a
+        utilizar as funcionalidades disponíveis na plataforma.
+      </p>
+
+      <h3>1. Acessar sua conta</h3>
+      <p>
+        Faça login com suas credenciais cadastradas. Caso ainda não
+        tenha uma conta, utilize a opção de cadastro.
+      </p>
+
+      <h3>2. Organizar suas matérias</h3>
+      <p>
+        Acesse a área de matérias para visualizar e organizar as
+        disciplinas disponíveis no sistema.
+      </p>
+
+      <h3>3. Gerenciar metas</h3>
+      <p>
+        Utilize a área de metas para registrar e acompanhar seus
+        objetivos de estudo, conforme as opções disponíveis.
+      </p>
+
+      <h3>4. Registrar sessões de estudo</h3>
+      <p>
+        Acesse a área de sessões para utilizar os recursos disponíveis
+        para organizar seus períodos de estudo.
+      </p>
+
+      <h3>5. Alterar sua senha</h3>
+      <p>
+        Na área da conta, utilize a opção de alteração de senha para
+        atualizar suas credenciais de acesso.
+      </p>
+    </article>
+
+  {% elif titulo == "Contato" %}
+    <article>
+      <h2>Entre em contato</h2>
+      <p>
+        Tem dúvidas, encontrou algum problema ou deseja enviar uma
+        sugestão sobre o MetaEstudo? Entre em contato com a equipe
+        responsável pelo projeto.
+      </p>
+
+      <h3>Suporte e sugestões</h3>
+      <p>
+        Utilize o canal de comunicação definido pela equipe do projeto
+        para relatar dificuldades, sugerir melhorias ou esclarecer
+        dúvidas sobre a plataforma.
+      </p>
+
+      <h3>Antes de entrar em contato</h3>
+      <p>
+        Descreva sua dúvida ou o problema encontrado com o máximo
+        de clareza possível. Não compartilhe sua senha ou outras
+        informações confidenciais.
+      </p>
+    </article>
+  {% endif %}
 {% endblock %}
