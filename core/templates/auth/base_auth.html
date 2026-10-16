@@ -4,6 +4,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="{% static 'js/global/themes.js' %}?v=2"></script>
     <title>
       {% block title %}
         MetaEstudo
@@ -15,7 +16,8 @@
     <link rel="stylesheet" href="{% static 'css/global/colors.css' %}" />
     <link rel="stylesheet" href="{% static 'css/global/typography.css' %}" />
     <link rel="stylesheet" href="{% static 'css/global/variables.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/pages/base_auth.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/global/theme-toggle.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/pages/base_auth.css' %}?v=3" />
     {% block extra_css %}
 
     {% endblock %}
@@ -24,12 +26,14 @@
     <div class="auth-shell">
       <!-- Login e cadastro entram nesta coluna pelo bloco auth_content. -->
       <section class="auth-panel">
-        <a href="{% url 'home' %}" class="brand">
+        <div class="auth-panel-header">
+          <a href="{% url 'home' %}" class="brand">
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 6.5c-1.8-1.3-4.2-2-6.5-2-1 0-2 .13-3 .4v13.6c1-.27 2-.4 3-.4 2.3 0 4.7.7 6.5 2 1.8-1.3 4.2-2 6.5-2 1 0 2 .13 3 .4V4.9c-1-.27-2-.4-3-.4-2.3 0-4.7.7-6.5 2Z" />
             <path d="M12 6.5v13.6" />
           </svg>Meta<span class="brand-accent">Estudo</span>
-        </a>
+          </a>
+        </div>
 
         <div class="auth-panel-body">
           {% block auth_content %}
@@ -39,12 +43,16 @@
       </section>
 
       <!-- Área visual separada do formulário para manter o layout flexível no mobile. -->
-      <aside class="auth-visual"></aside>
+      <aside class="auth-visual">
+        <div class="auth-utilities">
+          {% include 'components/theme_toggle.html' %}
+          <a class="auth-back-link" href="{% url 'index' %}">Voltar ao início</a>
+        </div>
+      </aside>
     </div>
 
     <!-- base_auth.js cuida apenas dos controles comuns dos formulários, como mostrar a senha. -->
     <script src="{% static 'js/pages/base_auth.js' %}"></script>
-    <script src="{% static 'js/global/themes.js' %}"></script>
 
     {% block extra_js %}
 

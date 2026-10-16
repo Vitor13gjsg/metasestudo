@@ -10,12 +10,21 @@ from .forms import CadastroForm, LoginForm, MetaForm
 
 # Create your views here.
 def index(request):
-   # if request.user.is_authenticated:
-    #    return redirect("home")
+    if request.user.is_authenticated:
+        return redirect("home")
     return render(request, "index.html")
 
+def pagina_informativa(request, pagina):
+    titulos = {
+        "termos": "Termos",
+        "privacidade": "Privacidade",
+        "contato": "Contato",
+        "ajuda": "Ajuda",
+    }
+    return render(request, "pages/info/informativa.html", {"titulo": titulos[pagina]})
+
 def home(request):
-    return render(request, "pages/home.html")
+    return render(request, "pages/app/home.html")
 
 def login(request):
     if request.method == "POST":
@@ -72,21 +81,21 @@ def materias(request):
         return redirect('materias') # Redireciona de volta para a mesma página após salvar
     # Lógica para o GET: filtrar as matérias disponíveis para o usuário logado
     materias_disponiveis = Materia.objects.filter(
-        Q(is_visivel=True) | Q(criador=request.user) | Q(usuario=request.user)
+        Q(is_visivel=True) | Q(criador=request.user) | Q(usuarios=request.user)
     ).distinct()
 
     context = {
         'materias_disponiveis': materias_disponiveis
     }
 
-    return render(request, "pages/materias.html", context)
+    return render(request, "pages/app/materias.html", context)
 
 def metas(request):
     lista_metas = Meta.objects.all()
     context = {
         'lista_metas': lista_metas
     }
-    return render(request, 'metas.html', context)
+    return render(request, 'pages/app/metas.html', context)
 
 def area_cadastro(request):
     form = MetaForm(request.POST or None)
@@ -98,7 +107,7 @@ def area_cadastro(request):
     context = {
         'form': form
     }
-    return render(request, 'area_cadastro.html', context)
+    return render(request, 'pages/app/area_cadastro.html', context)
 
 def area_editar(request, id):
     meta = Meta.objects.get(pk=id)
@@ -111,7 +120,7 @@ def area_editar(request, id):
     context = {
         'form': form
     }
-    return render(request, 'area_cadastro.html', context)
+    return render(request, 'pages/app/area_cadastro.html', context)
 
 def area_remover(request, id):
     meta = Meta.objects.get(pk=id)
@@ -119,11 +128,11 @@ def area_remover(request, id):
     return redirect('metas')
 
 def sessoes(request):
-    return render(request, "pages/sessoes.html")
+    return render(request, "pages/app/sessoes.html")
    
 @login_required(login_url="login")
 def conta(request):
-    return render(request, "pages/conta.html")
+    return render(request, "pages/account/conta.html")
 
 @login_required(login_url="login")
 def alterar_senha(request):
@@ -148,7 +157,7 @@ def alterar_senha(request):
 
     return render(
         request,
-        "pages/alterar_senha.html",
+        "pages/account/alterar_senha.html",
         {"form": form}
     )
    

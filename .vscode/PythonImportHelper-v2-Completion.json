@@ -1,6 +1,87 @@
 [
     {
+        "label": "django.db.models.deletion",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "django.db.models.deletion",
+        "description": "django.db.models.deletion",
+        "detail": "django.db.models.deletion",
+        "documentation": {}
+    },
+    {
+        "label": "settings",
+        "importPath": "django.conf",
+        "description": "django.conf",
+        "isExtraImport": true,
+        "detail": "django.conf",
+        "documentation": {}
+    },
+    {
+        "label": "settings",
+        "importPath": "django.conf",
+        "description": "django.conf",
+        "isExtraImport": true,
+        "detail": "django.conf",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
         "label": "admin",
+        "importPath": "django.contrib",
+        "description": "django.contrib",
+        "isExtraImport": true,
+        "detail": "django.contrib",
+        "documentation": {}
+    },
+    {
+        "label": "messages",
         "importPath": "django.contrib",
         "description": "django.contrib",
         "isExtraImport": true,
@@ -24,11 +105,67 @@
         "documentation": {}
     },
     {
-        "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "forms",
+        "importPath": "django",
+        "description": "django",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "django",
+        "documentation": {}
+    },
+    {
+        "label": "User",
+        "importPath": "django.contrib.auth.models",
+        "description": "django.contrib.auth.models",
+        "isExtraImport": true,
+        "detail": "django.contrib.auth.models",
+        "documentation": {}
+    },
+    {
+        "label": "User",
+        "importPath": "django.contrib.auth.models",
+        "description": "django.contrib.auth.models",
+        "isExtraImport": true,
+        "detail": "django.contrib.auth.models",
+        "documentation": {}
+    },
+    {
+        "label": "UserCreationForm",
+        "importPath": "django.contrib.auth.forms",
+        "description": "django.contrib.auth.forms",
+        "isExtraImport": true,
+        "detail": "django.contrib.auth.forms",
+        "documentation": {}
+    },
+    {
+        "label": "PasswordChangeForm",
+        "importPath": "django.contrib.auth.forms",
+        "description": "django.contrib.auth.forms",
+        "isExtraImport": true,
+        "detail": "django.contrib.auth.forms",
+        "documentation": {}
+    },
+    {
+        "label": "Meta",
+        "importPath": "core.models",
+        "description": "core.models",
+        "isExtraImport": true,
+        "detail": "core.models",
+        "documentation": {}
+    },
+    {
+        "label": "Meta",
+        "importPath": "core.models",
+        "description": "core.models",
+        "isExtraImport": true,
+        "detail": "core.models",
+        "documentation": {}
+    },
+    {
+        "label": "Materia",
+        "importPath": "core.models",
+        "description": "core.models",
+        "isExtraImport": true,
+        "detail": "core.models",
         "documentation": {}
     },
     {
@@ -40,11 +177,59 @@
         "documentation": {}
     },
     {
+        "label": "redirect",
+        "importPath": "django.shortcuts",
+        "description": "django.shortcuts",
+        "isExtraImport": true,
+        "detail": "django.shortcuts",
+        "documentation": {}
+    },
+    {
         "label": "render",
         "importPath": "django.shortcuts",
         "description": "django.shortcuts",
         "isExtraImport": true,
         "detail": "django.shortcuts",
+        "documentation": {}
+    },
+    {
+        "label": "login",
+        "importPath": "django.contrib.auth",
+        "description": "django.contrib.auth",
+        "isExtraImport": true,
+        "detail": "django.contrib.auth",
+        "documentation": {}
+    },
+    {
+        "label": "logout",
+        "importPath": "django.contrib.auth",
+        "description": "django.contrib.auth",
+        "isExtraImport": true,
+        "detail": "django.contrib.auth",
+        "documentation": {}
+    },
+    {
+        "label": "update_session_auth_hash",
+        "importPath": "django.contrib.auth",
+        "description": "django.contrib.auth",
+        "isExtraImport": true,
+        "detail": "django.contrib.auth",
+        "documentation": {}
+    },
+    {
+        "label": "login_required",
+        "importPath": "django.contrib.auth.decorators",
+        "description": "django.contrib.auth.decorators",
+        "isExtraImport": true,
+        "detail": "django.contrib.auth.decorators",
+        "documentation": {}
+    },
+    {
+        "label": "Q",
+        "importPath": "django.db.models",
+        "description": "django.db.models",
+        "isExtraImport": true,
+        "detail": "django.db.models",
         "documentation": {}
     },
     {
@@ -81,11 +266,115 @@
         "documentation": {}
     },
     {
-        "label": "views",
-        "importPath": "core",
-        "description": "core",
+        "label": "index",
+        "importPath": "core.views",
+        "description": "core.views",
         "isExtraImport": true,
-        "detail": "core",
+        "detail": "core.views",
+        "documentation": {}
+    },
+    {
+        "label": "home",
+        "importPath": "core.views",
+        "description": "core.views",
+        "isExtraImport": true,
+        "detail": "core.views",
+        "documentation": {}
+    },
+    {
+        "label": "login",
+        "importPath": "core.views",
+        "description": "core.views",
+        "isExtraImport": true,
+        "detail": "core.views",
+        "documentation": {}
+    },
+    {
+        "label": "cadastro",
+        "importPath": "core.views",
+        "description": "core.views",
+        "isExtraImport": true,
+        "detail": "core.views",
+        "documentation": {}
+    },
+    {
+        "label": "materias",
+        "importPath": "core.views",
+        "description": "core.views",
+        "isExtraImport": true,
+        "detail": "core.views",
+        "documentation": {}
+    },
+    {
+        "label": "metas",
+        "importPath": "core.views",
+        "description": "core.views",
+        "isExtraImport": true,
+        "detail": "core.views",
+        "documentation": {}
+    },
+    {
+        "label": "area_cadastro",
+        "importPath": "core.views",
+        "description": "core.views",
+        "isExtraImport": true,
+        "detail": "core.views",
+        "documentation": {}
+    },
+    {
+        "label": "area_editar",
+        "importPath": "core.views",
+        "description": "core.views",
+        "isExtraImport": true,
+        "detail": "core.views",
+        "documentation": {}
+    },
+    {
+        "label": "area_remover",
+        "importPath": "core.views",
+        "description": "core.views",
+        "isExtraImport": true,
+        "detail": "core.views",
+        "documentation": {}
+    },
+    {
+        "label": "sessoes",
+        "importPath": "core.views",
+        "description": "core.views",
+        "isExtraImport": true,
+        "detail": "core.views",
+        "documentation": {}
+    },
+    {
+        "label": "conta",
+        "importPath": "core.views",
+        "description": "core.views",
+        "isExtraImport": true,
+        "detail": "core.views",
+        "documentation": {}
+    },
+    {
+        "label": "alterar_senha",
+        "importPath": "core.views",
+        "description": "core.views",
+        "isExtraImport": true,
+        "detail": "core.views",
+        "documentation": {}
+    },
+    {
+        "label": "sair",
+        "importPath": "core.views",
+        "description": "core.views",
+        "isExtraImport": true,
+        "detail": "core.views",
+        "documentation": {}
+    },
+    {
+        "label": "pagina_informativa",
+        "importPath": "core.views",
+        "description": "core.views",
+        "isExtraImport": true,
+        "detail": "core.views",
         "documentation": {}
     },
     {
@@ -106,6 +395,33 @@
         "documentation": {}
     },
     {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "core.migrations.0001_initial",
+        "description": "core.migrations.0001_initial",
+        "peekOfCode": "class Migration(migrations.Migration):\n    initial = True\n    dependencies = [\n        migrations.swappable_dependency(settings.AUTH_USER_MODEL),\n    ]\n    operations = [\n        migrations.CreateModel(\n            name='Meta',\n            fields=[\n                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),",
+        "detail": "core.migrations.0001_initial",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "core.migrations.0002_remove_meta_concluida_remove_meta_usuario",
+        "description": "core.migrations.0002_remove_meta_concluida_remove_meta_usuario",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('core', '0001_initial'),\n    ]\n    operations = [\n        migrations.RemoveField(\n            model_name='meta',\n            name='concluida',\n        ),\n        migrations.RemoveField(",
+        "detail": "core.migrations.0002_remove_meta_concluida_remove_meta_usuario",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "core.migrations.0003_materia",
+        "description": "core.migrations.0003_materia",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('core', '0002_remove_meta_concluida_remove_meta_usuario'),\n        migrations.swappable_dependency(settings.AUTH_USER_MODEL),\n    ]\n    operations = [\n        migrations.CreateModel(\n            name='Materia',\n            fields=[\n                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),",
+        "detail": "core.migrations.0003_materia",
+        "documentation": {}
+    },
+    {
         "label": "CoreConfig",
         "kind": 6,
         "importPath": "core.apps",
@@ -115,11 +431,65 @@
         "documentation": {}
     },
     {
+        "label": "CadastroForm",
+        "kind": 6,
+        "importPath": "core.forms",
+        "description": "core.forms",
+        "peekOfCode": "class CadastroForm(UserCreationForm):\n    email = forms.EmailField(\n      required=True,\n      widget=forms.EmailInput(attrs={\n          \"placeholder\": \"E-mail\", \n          \"autoComplete\": \"email\",\n     })\n    )\n    class Meta:\n        model = User",
+        "detail": "core.forms",
+        "documentation": {}
+    },
+    {
+        "label": "LoginForm",
+        "kind": 6,
+        "importPath": "core.forms",
+        "description": "core.forms",
+        "peekOfCode": "class LoginForm(forms.Form):\n    email = forms.EmailField(\n        widget=forms.EmailInput(attrs={\n            \"placeholder\": \"E-mail\",\n            \"autoComplete\": \"email\",\n        })\n    )\n    password = forms.CharField(\n        widget=forms.PasswordInput(attrs={\n            \"placeholder\": \"Senha\",",
+        "detail": "core.forms",
+        "documentation": {}
+    },
+    {
+        "label": "MetaForm",
+        "kind": 6,
+        "importPath": "core.forms",
+        "description": "core.forms",
+        "peekOfCode": "class MetaForm(forms.ModelForm):\n    class Meta:\n        model = Meta\n        fields = ['titulo']",
+        "detail": "core.forms",
+        "documentation": {}
+    },
+    {
+        "label": "Meta",
+        "kind": 6,
+        "importPath": "core.models",
+        "description": "core.models",
+        "peekOfCode": "class Meta(models.Model):\n    titulo = models.CharField(max_length=200)\n    criada_em = models.DateTimeField(auto_now_add=True)\n    def __str__(self):\n        return self.titulo\nclass Materia(models.Model):\n    nome = models.CharField(max_length=100)\n    cor = models.CharField(max_length=7, default=\"#FFFFFF\") # Código HEX da cor\n    is_visivel = models.BooleanField(default=True) # True para Admin\n    # Quem criou a matéria (admin ou usuário normal)",
+        "detail": "core.models",
+        "documentation": {}
+    },
+    {
+        "label": "Materia",
+        "kind": 6,
+        "importPath": "core.models",
+        "description": "core.models",
+        "peekOfCode": "class Materia(models.Model):\n    nome = models.CharField(max_length=100)\n    cor = models.CharField(max_length=7, default=\"#FFFFFF\") # Código HEX da cor\n    is_visivel = models.BooleanField(default=True) # True para Admin\n    # Quem criou a matéria (admin ou usuário normal)\n    criador = models.ForeignKey(\n        User,\n        on_delete=models.SET_NULL,\n        null=True,\n        blank=True,",
+        "detail": "core.models",
+        "documentation": {}
+    },
+    {
         "label": "index",
         "kind": 2,
         "importPath": "core.views",
         "description": "core.views",
-        "peekOfCode": "def index(request):\n    return render(request, \"index.html\")\ndef home(request):\n    return render(request, \"pages/home.html\")\ndef login_view(request):\n    return render(request, \"auth/login.html\")\ndef cadastro(request):\n    return render(request, \"auth/cadastro.html\")\ndef materias(request):\n    return render(request, \"pages/materias.html\")",
+        "peekOfCode": "def index(request):\n    if request.user.is_authenticated:\n        return redirect(\"home\")\n    return render(request, \"index.html\")\ndef pagina_informativa(request, pagina):\n    titulos = {\n        \"termos\": \"Termos\",\n        \"privacidade\": \"Privacidade\",\n        \"contato\": \"Contato\",\n        \"ajuda\": \"Ajuda\",",
+        "detail": "core.views",
+        "documentation": {}
+    },
+    {
+        "label": "pagina_informativa",
+        "kind": 2,
+        "importPath": "core.views",
+        "description": "core.views",
+        "peekOfCode": "def pagina_informativa(request, pagina):\n    titulos = {\n        \"termos\": \"Termos\",\n        \"privacidade\": \"Privacidade\",\n        \"contato\": \"Contato\",\n        \"ajuda\": \"Ajuda\",\n    }\n    return render(request, \"pages/info/informativa.html\", {\"titulo\": titulos[pagina]})\ndef home(request):\n    return render(request, \"pages/app/home.html\")",
         "detail": "core.views",
         "documentation": {}
     },
@@ -128,16 +498,16 @@
         "kind": 2,
         "importPath": "core.views",
         "description": "core.views",
-        "peekOfCode": "def home(request):\n    return render(request, \"pages/home.html\")\ndef login_view(request):\n    return render(request, \"auth/login.html\")\ndef cadastro(request):\n    return render(request, \"auth/cadastro.html\")\ndef materias(request):\n    return render(request, \"pages/materias.html\")\ndef metas(request):\n    return render(request, \"pages/metas.html\")",
+        "peekOfCode": "def home(request):\n    return render(request, \"pages/app/home.html\")\ndef login(request):\n    if request.method == \"POST\":\n        form = LoginForm(request.POST)\n        if form.is_valid():\n                auth_login(request, form.get_user())\n                return redirect(\"home\")\n    else:\n        form = LoginForm()",
         "detail": "core.views",
         "documentation": {}
     },
     {
-        "label": "login_view",
+        "label": "login",
         "kind": 2,
         "importPath": "core.views",
         "description": "core.views",
-        "peekOfCode": "def login_view(request):\n    return render(request, \"auth/login.html\")\ndef cadastro(request):\n    return render(request, \"auth/cadastro.html\")\ndef materias(request):\n    return render(request, \"pages/materias.html\")\ndef metas(request):\n    return render(request, \"pages/metas.html\")\ndef configuracoes(request):\n    return render(request, \"pages/configuracoes.html\")",
+        "peekOfCode": "def login(request):\n    if request.method == \"POST\":\n        form = LoginForm(request.POST)\n        if form.is_valid():\n                auth_login(request, form.get_user())\n                return redirect(\"home\")\n    else:\n        form = LoginForm()\n    return render(request, \"auth/login.html\", {\"form\": form})\ndef cadastro(request):",
         "detail": "core.views",
         "documentation": {}
     },
@@ -146,7 +516,7 @@
         "kind": 2,
         "importPath": "core.views",
         "description": "core.views",
-        "peekOfCode": "def cadastro(request):\n    return render(request, \"auth/cadastro.html\")\ndef materias(request):\n    return render(request, \"pages/materias.html\")\ndef metas(request):\n    return render(request, \"pages/metas.html\")\ndef configuracoes(request):\n    return render(request, \"pages/configuracoes.html\")\ndef conta(request):\n    return render(request, \"pages/conta.html\")",
+        "peekOfCode": "def cadastro(request):\n    if request.method == \"POST\":\n        form = CadastroForm(request.POST)\n        if form.is_valid():\n            form.save()\n            return redirect(\"home\") \n        return render(request, \"auth/cadastro.html\", {\n            \"form\": form\n        })\n    return render(request, \"auth/cadastro.html\")",
         "detail": "core.views",
         "documentation": {}
     },
@@ -155,7 +525,7 @@
         "kind": 2,
         "importPath": "core.views",
         "description": "core.views",
-        "peekOfCode": "def materias(request):\n    return render(request, \"pages/materias.html\")\ndef metas(request):\n    return render(request, \"pages/metas.html\")\ndef configuracoes(request):\n    return render(request, \"pages/configuracoes.html\")\ndef conta(request):\n    return render(request, \"pages/conta.html\")",
+        "peekOfCode": "def materias(request):\n    if request.method == 'POST':\n        # Matérias selecionadas nas opções existentes\n        materias_selecionadas_ids = request.POST.getlist('materias_existentes')\n        # Texto digitado para criar uma nova matéria (se houver)\n        nova_materia_nome = request.POST.get('nova_materia_texto', '').strip()\n        # Identifica se o utilizador é administrador\n        is_admin = request.user.is_staff\n        # Vincula as matérias existentes selecionadas ao utilizador\n        materias_para_vincular = Materia.objects.filter(id__in=materias_selecionadas_ids)",
         "detail": "core.views",
         "documentation": {}
     },
@@ -164,16 +534,43 @@
         "kind": 2,
         "importPath": "core.views",
         "description": "core.views",
-        "peekOfCode": "def metas(request):\n    return render(request, \"pages/metas.html\")\ndef configuracoes(request):\n    return render(request, \"pages/configuracoes.html\")\ndef conta(request):\n    return render(request, \"pages/conta.html\")",
+        "peekOfCode": "def metas(request):\n    lista_metas = Meta.objects.all()\n    context = {\n        'lista_metas': lista_metas\n    }\n    return render(request, 'pages/app/metas.html', context)\ndef area_cadastro(request):\n    form = MetaForm(request.POST or None)\n    if form.is_valid():\n        form.save()",
         "detail": "core.views",
         "documentation": {}
     },
     {
-        "label": "configuracoes",
+        "label": "area_cadastro",
         "kind": 2,
         "importPath": "core.views",
         "description": "core.views",
-        "peekOfCode": "def configuracoes(request):\n    return render(request, \"pages/configuracoes.html\")\ndef conta(request):\n    return render(request, \"pages/conta.html\")",
+        "peekOfCode": "def area_cadastro(request):\n    form = MetaForm(request.POST or None)\n    if form.is_valid():\n        form.save()\n        return redirect('metas')\n    context = {\n        'form': form\n    }\n    return render(request, 'pages/app/area_cadastro.html', context)\ndef area_editar(request, id):",
+        "detail": "core.views",
+        "documentation": {}
+    },
+    {
+        "label": "area_editar",
+        "kind": 2,
+        "importPath": "core.views",
+        "description": "core.views",
+        "peekOfCode": "def area_editar(request, id):\n    meta = Meta.objects.get(pk=id)\n    form = MetaForm(request.POST or None, instance=meta)\n    if form.is_valid():\n        form.save()\n        return redirect('metas')\n    context = {\n        'form': form\n    }\n    return render(request, 'pages/app/area_cadastro.html', context)",
+        "detail": "core.views",
+        "documentation": {}
+    },
+    {
+        "label": "area_remover",
+        "kind": 2,
+        "importPath": "core.views",
+        "description": "core.views",
+        "peekOfCode": "def area_remover(request, id):\n    meta = Meta.objects.get(pk=id)\n    meta.delete()\n    return redirect('metas')\ndef sessoes(request):\n    return render(request, \"pages/app/sessoes.html\")\n@login_required(login_url=\"login\")\ndef conta(request):\n    return render(request, \"pages/account/conta.html\")\n@login_required(login_url=\"login\")",
+        "detail": "core.views",
+        "documentation": {}
+    },
+    {
+        "label": "sessoes",
+        "kind": 2,
+        "importPath": "core.views",
+        "description": "core.views",
+        "peekOfCode": "def sessoes(request):\n    return render(request, \"pages/app/sessoes.html\")\n@login_required(login_url=\"login\")\ndef conta(request):\n    return render(request, \"pages/account/conta.html\")\n@login_required(login_url=\"login\")\ndef alterar_senha(request):\n    if request.method == \"POST\":\n        form = PasswordChangeForm(\n            request.user,",
         "detail": "core.views",
         "documentation": {}
     },
@@ -182,7 +579,25 @@
         "kind": 2,
         "importPath": "core.views",
         "description": "core.views",
-        "peekOfCode": "def conta(request):\n    return render(request, \"pages/conta.html\")",
+        "peekOfCode": "def conta(request):\n    return render(request, \"pages/account/conta.html\")\n@login_required(login_url=\"login\")\ndef alterar_senha(request):\n    if request.method == \"POST\":\n        form = PasswordChangeForm(\n            request.user,\n            request.POST\n        )\n        if form.is_valid():",
+        "detail": "core.views",
+        "documentation": {}
+    },
+    {
+        "label": "alterar_senha",
+        "kind": 2,
+        "importPath": "core.views",
+        "description": "core.views",
+        "peekOfCode": "def alterar_senha(request):\n    if request.method == \"POST\":\n        form = PasswordChangeForm(\n            request.user,\n            request.POST\n        )\n        if form.is_valid():\n            usuario = form.save()\n            update_session_auth_hash(request, usuario)\n            messages.success(",
+        "detail": "core.views",
+        "documentation": {}
+    },
+    {
+        "label": "sair",
+        "kind": 2,
+        "importPath": "core.views",
+        "description": "core.views",
+        "peekOfCode": "def sair(request):\n    if request.method == \"POST\":\n        logout(request)\n        return redirect(\"login\")\n    return redirect(\"conta\")",
         "detail": "core.views",
         "documentation": {}
     },
@@ -362,7 +777,7 @@
         "kind": 5,
         "importPath": "metasestudo.urls",
         "description": "metasestudo.urls",
-        "peekOfCode": "urlpatterns = [\n    path('admin/', admin.site.urls),\n    path('', views.index, name='index'),\n    path('home/', views.home, name='home'),\n    path('login/', views.login_view, name='login'),\n    path('cadastro/', views.cadastro, name='cadastro'),\n    path('materias/', views.materias, name='materias'),\n    path('metas/', views.metas, name='metas'),\n    path('configuracoes/', views.configuracoes, name='configuracoes'),\n    path('conta/', views.conta, name='conta'),",
+        "peekOfCode": "urlpatterns = [\n    path('admin/', admin.site.urls),\n    path('', index, name='index'),\n    path('termos/', pagina_informativa, {'pagina': 'termos'}, name='termos'),\n    path('privacidade/', pagina_informativa, {'pagina': 'privacidade'}, name='privacidade'),\n    path('contato/', pagina_informativa, {'pagina': 'contato'}, name='contato'),\n    path('ajuda/', pagina_informativa, {'pagina': 'ajuda'}, name='ajuda'),\n    path('home/', home, name='home'),\n    path('login/', login, name='login'),\n    path('cadastro/', cadastro, name='cadastro'),",
         "detail": "metasestudo.urls",
         "documentation": {}
     },

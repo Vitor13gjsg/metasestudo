@@ -1,14 +1,19 @@
 html,
 body {
     height: 100%;
-    background: url("../../images/auth-background.png");
-    background-size: 100% auto;
-    background-position: top-center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    background-color: var(--bg);
     color: var(--text);
     font-family: var(--font-family);
     -webkit-font-smoothing: antialiased;
+}
+
+body {
+    background-image: url("../../images/auth-background.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
 }
 
 a {
@@ -29,6 +34,52 @@ a {
     display: flex;
     flex-direction: column;
     padding: 48px 64px;
+}
+
+.auth-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.auth-utilities {
+    position: absolute;
+    top: 48px;
+    right: 48px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    z-index: 1;
+}
+
+.auth-back-link {
+    color: #eef1ef;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: var(--radius-md);
+    padding: 9px 14px;
+    font-size: var(--font-size-body-sm);
+    background: rgba(10, 13, 12, 0.55);
+    transition: background .15s ease, border-color .15s ease;
+}
+
+.auth-back-link:hover {
+    background: rgba(10, 13, 12, 0.78);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+html[data-theme="light"] body {
+    background-image: url("../../images/auth-background-light.png");
+}
+
+html[data-theme="light"] .auth-back-link {
+    color: var(--text);
+    border-color: var(--border);
+    background: rgba(255, 255, 255, 0.72);
+}
+
+html[data-theme="light"] .auth-back-link:hover {
+    background: rgba(255, 255, 255, 0.92);
 }
 
 .brand {
@@ -232,4 +283,27 @@ a {
 .auth-visual {
     position: relative;
     overflow: hidden;
+}
+
+@media (max-width: 760px) {
+    .auth-shell {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .auth-panel {
+        padding: 80px 24px 32px;
+    }
+
+    .auth-visual {
+        position: fixed;
+        inset: 16px 16px auto auto;
+        z-index: 2;
+        overflow: visible;
+    }
+
+    .auth-utilities {
+        position: static;
+        justify-content: flex-end;
+        gap: 10px;
+    }
 }

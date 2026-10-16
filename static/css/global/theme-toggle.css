@@ -1,0 +1,42 @@
+.theme-toggle {
+    position: relative;
+    width: 52px;
+    height: 30px;
+    flex: 0 0 52px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--bg-soft);
+    display: flex;
+    align-items: center;
+    padding: 3px;
+    cursor: pointer;
+}
+
+.theme-toggle:focus-visible {
+    outline: 2px solid var(--mint);
+    outline-offset: 3px;
+}
+
+.theme-toggle__thumb {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--mint);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--on-mint);
+    transition: transform .25s ease;
+    transform: translateX(0);
+}
+
+[data-theme="dark"] .theme-toggle__thumb {
+    transform: translateX(22px);
+    background: var(--surface-dark);
+    color: var(--mint);
+}
+
+.theme-toggle__thumb svg {
+    width: 13px;
+    height: 13px;
+}

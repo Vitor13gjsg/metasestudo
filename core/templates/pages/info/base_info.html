@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br" translate="no">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="{% static 'js/global/themes.js' %}?v=2"></script>
+    <title>{% block title %}MetaEstudo{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'css/global/reset.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/global/colors.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/global/typography.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/global/variables.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/global/theme-toggle.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/pages/base.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/pages/components.css' %}?v=4" />
+    <link rel="stylesheet" href="{% static 'css/pages/info.css' %}?v=2" />
+  </head>
+  <body>
+    <div class="info-shell">
+      {% include 'components/header.html' %}
+      <main class="info-main">
+        {% block content %}{% endblock %}
+      </main>
+      {% include 'components/footer.html' %}
+    </div>
+  </body>
+</html>

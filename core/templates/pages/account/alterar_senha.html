@@ -1,19 +1,12 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alterar senha - MetaEstudo</title>
+{% extends 'base.html' %}
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f4f7f6;
-            color: #24332e;
-            padding: 30px 16px;
-        }
+{% block title %}
+    Alterar senha - MetaEstudo
+{% endblock %}
 
-        main {
+{% block extra_css %}
+        <style>
+        .password-page {
             max-width: 500px;
             margin: 30px auto;
             background: white;
@@ -21,7 +14,7 @@
             border-radius: 12px;
         }
 
-        input {
+        .password-page input {
             display: block;
             width: 100%;
             box-sizing: border-box;
@@ -29,7 +22,7 @@
             margin: 8px 0 16px;
         }
 
-        button {
+        .password-page button {
             width: 100%;
             padding: 12px;
             background: #176b52;
@@ -43,10 +36,10 @@
             color: #b83232;
         }
     </style>
-</head>
+{% endblock %}
 
-<body>
-    <main>
+{% block content %}
+    <section class="password-page">
         <h1>Alterar senha</h1>
 
         <p>Preencha os campos abaixo para atualizar sua senha.</p>
@@ -92,6 +85,5 @@
         <p>
             <a href="{% url 'conta' %}">Voltar para minha conta</a>
         </p>
-    </main>
-</body>
-</html>
+    </section>
+{% endblock %}

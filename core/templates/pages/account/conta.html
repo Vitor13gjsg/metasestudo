@@ -1,21 +1,12 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minha conta - MetaEstudo</title>
+{% extends 'base.html' %}
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f4f7f6;
-            margin: 0;
-            padding: 30px 16px;
-            color: #24332e;
-        }
+{% block title %}
+    Minha conta - MetaEstudo
+{% endblock %}
 
-        main {
+{% block extra_css %}
+        <style>
+        .account-page {
             max-width: 600px;
             margin: 30px auto;
             background: white;
@@ -24,7 +15,7 @@
             box-shadow: 0 4px 15px #00000012;
         }
 
-        h1 {
+        .account-page h1 {
             margin-top: 0;
         }
 
@@ -42,7 +33,7 @@
             background: #f0f8f4;
         }
 
-        button {
+        .account-page button {
             width: 100%;
             padding: 13px;
             margin-top: 15px;
@@ -60,10 +51,10 @@
             border-radius: 6px;
         }
     </style>
-</head>
+{% endblock %}
 
-<body>
-    <main>
+{% block content %}
+    <section class="account-page">
         <h1>Minha conta</h1>
 
         <p>
@@ -96,6 +87,5 @@
         <p>
             <a href="{% url 'home' %}">Voltar ao sistema</a>
         </p>
-    </main>
-</body>
-</html>
+    </section>
+{% endblock %}

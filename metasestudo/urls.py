@@ -19,12 +19,16 @@ from django.urls import path
 from core.views import (
     index, home, login, cadastro, materias, metas,
     area_cadastro, area_editar, area_remover, sessoes,
-    conta, alterar_senha, sair
+    conta, alterar_senha, sair, pagina_informativa
 )
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='index'),
+    path('termos/', pagina_informativa, {'pagina': 'termos'}, name='termos'),
+    path('privacidade/', pagina_informativa, {'pagina': 'privacidade'}, name='privacidade'),
+    path('contato/', pagina_informativa, {'pagina': 'contato'}, name='contato'),
+    path('ajuda/', pagina_informativa, {'pagina': 'ajuda'}, name='ajuda'),
     path('home/', home, name='home'),
     path('login/', login, name='login'),
     path('cadastro/', cadastro, name='cadastro'),

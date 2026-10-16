@@ -1,10 +1,5 @@
-// =========================================================
-// MetaEstudo — tema claro/escuro + sidebar mobile
-// =========================================================
+// MetaEstudo — tema claro/escuro 
 (function () {
-    const STORAGE_KEY = "metaestudo-theme";
-    const root = document.documentElement;
-    const toggleBtn = document.getElementById("theme-toggle");
     const menuBtn = document.getElementById("menu-toggle");
     const sidebar = document.getElementById("app-sidebar");
     const navLists = document.querySelectorAll(".nav-list");

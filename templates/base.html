@@ -4,6 +4,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="{% static 'js/global/themes.js' %}?v=2"></script>
     <title>
       {% block title %}
         MetaEstudo
@@ -15,8 +16,9 @@
     <link rel="stylesheet" href="{% static 'css/global/colors.css' %}" />
     <link rel="stylesheet" href="{% static 'css/global/typography.css' %}" />
     <link rel="stylesheet" href="{% static 'css/global/variables.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/global/theme-toggle.css' %}" />
     <link rel="stylesheet" href="{% static 'css/pages/base.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/pages/components.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/pages/components.css' %}?v=4" />
     {% block extra_css %}
     {% endblock %}
   </head>
@@ -36,7 +38,6 @@
     </div>
 
     <script src="{% static 'js/pages/base.js' %}"></script>
-    <script src="{% static 'js/global/themes.js' %}"></script>
     {% block extra_js %}
     {% endblock %}
   </body>

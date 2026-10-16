@@ -1,0 +1,48 @@
+{% extends 'pages/info/base_info.html' %}
+
+{% block title %}{{ titulo }} · MetaEstudo{% endblock %}
+
+{% block content %}
+  <a class="info-back-button" href="{% url 'index' %}">
+    <span aria-hidden="true">←</span> Voltar para o início
+  </a>
+
+  <header class="info-heading">
+    <p class="info-eyebrow">{{ titulo }}</p>
+    <h1>Conteúdo provisório</h1>
+  </header>
+
+  <article class="recipe-content">
+    <div class="recipe-title-row">
+      <div>
+        <p class="info-eyebrow">Receita de bolo</p>
+        <h2>Bolo simples</h2>
+      </div>
+      <span class="recipe-time">Preparo: 45 min</span>
+    </div>
+
+    <section aria-labelledby="ingredients-title">
+      <h3 id="ingredients-title">Ingredientes</h3>
+      <ul>
+        <li>2 xícaras de farinha de trigo</li>
+        <li>1 xícara de açúcar</li>
+        <li>3 ovos</li>
+        <li>1 xícara de leite</li>
+        <li>2 colheres de sopa de manteiga</li>
+        <li>1 colher de sopa de fermento em pó</li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="preparation-title">
+      <h3 id="preparation-title">Modo de preparo</h3>
+      <ol>
+        <li>Preaqueça o forno a 180 °C e unte uma forma.</li>
+        <li>Misture os ovos, o açúcar e a manteiga até formar um creme.</li>
+        <li>Acrescente a farinha e o leite aos poucos, mexendo até a massa ficar homogênea.</li>
+        <li>Incorpore o fermento delicadamente.</li>
+        <li>Despeje a massa na forma e asse por cerca de 35 minutos.</li>
+        <li>Espere esfriar antes de desenformar e servir.</li>
+      </ol>
+    </section>
+  </article>
+{% endblock %}
