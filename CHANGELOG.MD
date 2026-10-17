@@ -33,3 +33,6 @@
 - Criadas páginas provisórias de Termos, Privacidade, Contato e Ajuda, com navegação pelo footer
 - Ajustados header e footer compartilhados, incluindo remoção da busca e melhorias nos separadores
 - Responsável: Vitor
+
+## 16/10/2026
+- Escrita dos conteúdos dos rodapés e termo de usos. 
