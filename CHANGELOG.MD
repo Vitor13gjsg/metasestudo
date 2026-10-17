@@ -36,6 +36,8 @@
 
 ## 16/10/2026
 - Escrita dos conteúdos dos rodapés e termo de usos. 
+- Responsável: Eloiza
 
 ## 17/10/2026
 - Alterações em info.css e em informativa.html.
+- Responsável: Eloiza
