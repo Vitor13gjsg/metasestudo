@@ -1,7 +1,8 @@
 from django import forms    
 from django.contrib.auth.models import User 
 from django.contrib.auth.forms import UserCreationForm
-from core.models import Meta
+from django.db.models import Q
+from core.models import Meta, Materia
 
 class CadastroForm(UserCreationForm):
     email = forms.EmailField(
@@ -71,4 +72,19 @@ class LoginForm(forms.Form):
 class MetaForm(forms.ModelForm):
     class Meta:
         model = Meta
-        fields = ['titulo']
+        fields = ['titulo', 'data_limite', 'materia']
+        widgets = {
+            'titulo': forms.TextInput(attrs={'class': 'field-input', 'placeholder': 'Ex: Estudar 4 capítulos de Direito'}),
+            'data_limite': forms.DateInput(attrs={'class': 'field-input', type: 'date'}),
+            'materia': forms.Select(attrs={'class': 'field-input'}),
+        }
+
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user', None)
+        super().__init__(*args, **kwargs)
+        if user:
+            # Restringe as opções de matéria apenas às 'is_visivel'
+            self.fields['materia'].queryset = Materia.objects.filter(
+                Q(criador=user) | Q(usuarios=user)
+            ).distinct()
+            self.fields['materia'].required = False # Opcional, caso queira meta sem matéria

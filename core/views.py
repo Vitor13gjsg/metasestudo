@@ -4,6 +4,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
 from django.db.models import Q
+from django.shortcuts import get_object_or_404, redirect
+from django.utils import timezone
 
 from core.models import Meta, Materia
 from .forms import CadastroForm, LoginForm, MetaForm
@@ -49,65 +51,91 @@ def cadastro(request):
             
     return render(request, "auth/cadastro.html")
 
+@login_required(login_url='login')
 def materias(request):
-    if request.method == 'POST':
-        # Matérias selecionadas nas opções existentes
-        materias_selecionadas_ids = request.POST.getlist('materias_existentes')
-
-        # Texto digitado para criar uma nova matéria (se houver)
-        nova_materia_nome = request.POST.get('nova_materia_texto', '').strip()
-
-        # Identifica se o utilizador é administrador
-        is_admin = request.user.is_staff
-
-        # Vincula as matérias existentes selecionadas ao utilizador
-        materias_para_vincular = Materia.objects.filter(id__in=materias_selecionadas_ids)
-        for materia in materias_para_vincular:
-            materia.usuarios.add(request.user)
-
-        # Se o utilizador digitou uma nova matéria no campo de texto
-        if nova_materia_nome:
-            visibilidade = True if is_admin else False
-
-            nova_materia = Materia.objects.create(
-                nome=nova_materia_nome,
-                is_visivel=visibilidade,
-                criador=request.user
-            )
-
-            # Se for um utilizador normal, vincula automaticamente a ele
-            if not is_admin:
-                nova_materia.usuarios.add(request.user)
-        return redirect('materias') # Redireciona de volta para a mesma página após salvar
-    # Lógica para o GET: filtrar as matérias disponíveis para o usuário logado
-    materias_disponiveis = Materia.objects.filter(
-        Q(is_visivel=True) | Q(criador=request.user) | Q(usuarios=request.user)
+    #  Matérias que aparecem na tela principal de matérias
+    minhas_materias = Materia.objects.filter(
+        Q(criador=request.user) | Q(usuarios=request.user)
     ).distinct()
 
+    #  Matérias gerais do admin que aparecem na lista de adicionar matérias
+    materias_gerais_disponiveis = Materia.objects.filter(is_visivel=True)
+
+    if request.method == 'POST':
+        materias_selecionadas_ids = request.POST.getlist('materias_existentes')
+        nova_materia_nome = request.POST.get('nova_materia_texto', '').strip()
+        is_admin = request.user.is_staff
+
+        # Sincronizar as checkboxes das matérias gerais
+        for materia in materias_gerais_disponiveis:
+            if str(materia.id) in materias_selecionadas_ids:
+                materia.usuarios.add(request.user)
+            else:
+                materia.usuarios.remove(request.user)
+
+        # Criar nova matéria particular se preenchida
+        if nova_materia_nome:
+            nova_materia = Materia.objects.create(
+                nome=nova_materia_nome,
+                is_visivel=False, # É particular
+                criador=request.user
+            )
+            nova_materia.usuarios.add(request.user)
+
+        return redirect('materias')
+
     context = {
-        'materias_disponiveis': materias_disponiveis
+        'minhas_materias': minhas_materias,
+        'materias_gerais_disponiveis': materias_gerais_disponiveis
     }
 
     return render(request, "pages/app/materias.html", context)
 
+@login_required(login_url='login')
+def apagar_materia(request, materia_id):
+    # Só apaga se a matéria pertencer ao utilizador e for particular
+    materia = get_object_or_404(Materia, id=materia_id, criador=request.user, is_visivel=False)
+    
+    if request.method == 'POST':
+        materia.delete()
+        
+    return redirect('materias')
+
+@login_required(login_url='login')
 def metas(request):
-    lista_metas = Meta.objects.all()
-    context = {
-        'lista_metas': lista_metas
-    }
-    return render(request, 'pages/app/metas.html', context)
+    lista_metas = Meta.objects.filter(usuario=request.user).order_by('data_limite')
+    hoje = timezone.localdate()
 
+    if request.method == 'POST':
+        form = MetaForm(request.POST, user=request.user)
+        if form.is_valid():
+            meta = form.save(commit=False)
+            meta.usuario = request.user
+            meta.save()
+            return redirect('metas')
+    else:
+        form = MetaForm(user=request.user)
+
+    context = {
+        'lista_metas': lista_metas,
+        'hoje': hoje,
+        'form': form,
+    }
+    return render(request, "pages/app/metas.html", context)
+
+@login_required(login_url='login')
 def area_cadastro(request):
-    form = MetaForm(request.POST or None)
-
-    if form.is_valid():
-        form.save()
-        return redirect('metas')
-
-    context = {
-        'form': form
-    }
-    return render(request, 'pages/app/area_cadastro.html', context)
+    if request.method == 'POST':
+        form = MetaForm(request.POST, user=request.user)
+        if form.is_valid():
+            meta = form.save(commit=False)
+            meta.usuario = request.user
+            meta.save()
+            return redirect('metas')
+    else:
+        form = MetaForm(user=request.user)
+        
+    return render(request, "pages/app/area_cadastro.html", {'form': form})
 
 def area_editar(request, id):
     meta = Meta.objects.get(pk=id)

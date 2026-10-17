@@ -1,129 +1,332 @@
 {% extends 'base.html' %}
 
 {% block title %}
-  Em construção · MetaEstudo
+  Matérias · MetaEstudo
 {% endblock %}
 
 {% block extra_css %}
   <style>
-    .construcao {
-      width: min(90%, 700px);
-      text-align: center;
-      padding: 40px 20px;
+    .materias-container {
+      max-width: 800px;
       margin: 0 auto;
-      min-height: 100vh;
-    
+      padding: 10px 0;
+    }
+
+    .header-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 28px;
+    }
+
+    .header-flex h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.02em;
+      margin: 0;
+    }
+
+    .btn-primary-mint {
+      background-color: var(--mint);
+      color: var(--on-mint);
+      border: none;
+      padding: 10px 18px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary-mint:hover {
+      background-color: var(--mint-soft);
+      transform: translateY(-1px);
+    }
+
+    .materias-lista {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      gap: 12px;
     }
-    
-    .icone {
-      width: 90px;
-      height: 90px;
-      margin: 0 auto 35px;
-    
+
+    .materia-card {
+      background-color: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: border-color 0.2s ease, background-color 0.2s ease;
+    }
+
+    .materia-card:hover {
+      border-color: var(--mint-border);
+      background-color: var(--bg-soft);
+    }
+
+    .materia-info {
       display: flex;
       align-items: center;
-      justify-content: center;
-    
-      border: 3px solid #f2b705;
-      border-radius: 50%;
-    
-      color: #f2b705;
-      font-size: 42px;
+      gap: 12px;
     }
-    
-    .construcao h1 {
-      font-size: clamp(2.5rem, 7vw, 5rem);
-      line-height: 0.95;
-      font-weight: 300;
-      letter-spacing: -2px;
+
+    .materia-nome {
+      color: var(--text);
+      font-size: 1.05rem;
+      font-weight: 600;
     }
-    
-    .construcao h1 strong {
-      display: block;
-      margin-top: 8px;
-    
-      color: #f2b705;
-      font-weight: 800;
+
+    .badge {
+      font-size: 0.7rem;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
     }
-    
-    .linha {
-      width: 70px;
-      height: 4px;
-    
-      margin: 30px auto;
-    
-      background: #f2b705;
-      border-radius: 10px;
+
+    .badge-geral {
+      background-color: var(--mint-surface);
+      color: var(--mint);
+      border: 1px solid var(--mint-border);
     }
-    
-    .mensagem {
-      max-width: 520px;
-      margin: 0 auto;
-    
-      color: #c7c7c7;
-      font-size: 1.1rem;
-      line-height: 1.6;
+
+    .badge-particular {
+      background-color: rgba(124, 92, 255, 0.12);
+      color: var(--accent-purple);
+      border: 1px solid rgba(124, 92, 255, 0.3);
     }
-    
-    .voltar {
-      display: inline-block;
-      margin-top: 55px;
-    
-      color: #888;
-      text-decoration: none;
-    
+
+    .btn-delete {
+      background-color: transparent;
+      color: var(--danger);
+      border: 1px solid var(--danger-border);
+      padding: 6px 14px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-delete:hover {
+      background-color: var(--danger-soft);
+      color: var(--danger-text);
+    }
+
+    .empty-state {
+      background-color: var(--panel);
+      border: 1px dashed var(--border);
+      border-radius: 14px;
+      padding: 40px 20px;
+      text-align: center;
+      color: var(--text-dim);
       font-size: 0.95rem;
-    
-      transition: color 0.2s ease;
     }
-    
-    .voltar:hover {
-      color: #f2b705;
+
+    /* Modal de Gerenciamento */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(4px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+      z-index: 1000;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal {
+      background-color: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      width: 90%;
+      max-width: 480px;
+      padding: 28px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    }
+
+    .modal-title {
+      color: var(--text);
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 10px;
+    }
+
+    .checkbox-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      max-height: 160px;
+      overflow-y: auto;
+      margin-bottom: 22px;
+      padding-right: 4px;
+    }
+
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background-color: var(--field);
+      border: 1px solid var(--border-soft);
+      padding: 10px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      color: var(--text-mid);
+      font-size: 0.95rem;
+      transition: border-color 0.2s ease;
+    }
+
+    .checkbox-item:hover {
+      border-color: var(--border);
+    }
+
+    .checkbox-item input[type="checkbox"] {
+      accent-color: var(--mint);
+      width: 16px;
+      height: 16px;
+    }
+
+    .field-input {
+      width: 100%;
+      padding: 12px 14px;
+      background-color: var(--field);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 0.95rem;
+      box-sizing: border-box;
+      margin-bottom: 24px;
+      transition: border-color 0.2s ease, background-color 0.2s ease;
+    }
+
+    .field-input:focus {
+      outline: none;
+      border-color: var(--mint-border);
+      background-color: var(--field-focus);
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      color: var(--text-mid);
+      border: 1px solid var(--border);
+      padding: 10px 18px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--surface-hover);
+      color: var(--text);
     }
   </style>
 {% endblock %}
 
 {% block content %}
-  <h1>Matérias</h1>
+  <div class="materias-container">
+    <div class="header-flex">
+      <h1>Minhas Matérias</h1>
+      <button type="button" class="btn-primary-mint" id="openModalBtn">+ Adicionar Matéria</button>
+    </div>
 
-  <form method="POST"
-    {% csrf_token %}
+    <div class="materias-lista">
+      {% if minhas_materias %}
+        {% for materia in minhas_materias %}
+          <div class="materia-card">
+            <div class="materia-info">
+              <span class="materia-nome">{{ materia.nome }}</span>
+              <span class="badge {% if materia.is_visivel %}badge-geral{% else %}badge-particular{% endif %}">
+                {% if materia.is_visivel %}Geral{% else %}Particular{% endif %}
+              </span>
+            </div>
 
-    <fieldset>
-      <legend>Selecionar matérias existentes:</legend>
-
-      {% if materias_disponiveis %}
-        <ul>
-          {% for materia in materias_disponiveis %}
-            <li>
-              <!-- O 'name="materias_existentes"' e o 'value="{{ materia.id }}"' servem para a view pegar os IDs no request.POST.getlist -->
-              <label>
-                {{ materia.nome }}
-                {% if not materia.is_visivel %}
-                  <small>(Privada)</small>
-                {% endif %}
-              </label>
-            </li>
-          {% endfor %}
-        </ul>
+            {% if not materia.is_visivel and materia.criador == request.user %}
+              <form action="{% url 'apagar_materia' materia.id %}" method="POST" style="margin: 0;" onsubmit="return confirm('Tem certeza de que deseja apagar esta matéria?');">
+                {% csrf_token %}
+                <button type="submit" class="btn-delete">Excluir</button>
+              </form>
+            {% endif %}
+          </div>
+        {% endfor %}
       {% else %}
-        <p>Não há matérias disponíveis no momento.</p>
+        <div class="empty-state">
+          Nenhuma matéria adicionada.<br>Clique em "+ Adicionar Matéria".
+        </div>
       {% endif %}
-    </fieldset>
+    </div>
+  </div>
 
-    <br>
+  <!-- Modal -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+      <h2 class="modal-title">Gerenciar Matérias</h2>
 
-    <fieldset>
-      <legend>Ou criar uma nova matéria:</legend>
-      <input type="text" name="nova_materia_tecto" placeholder="Ex: Direito Constitucional">
-    </fieldset>
+      <form method="POST">
+        {% csrf_token %}
 
-    <br>
+        <div class="section-label">Matérias Gerais Disponíveis</div>
+        <div class="checkbox-list">
+          {% for materia in materias_gerais_disponiveis %}
+            <label class="checkbox-item">
+              <input type="checkbox" name="materias_existentes" value="{{ materia.id }}"
+                {% if request.user in materia.usuarios.all %}checked{% endif %}>
+              <span>{{ materia.nome }}</span>
+            </label>
+          {% endfor %}
+        </div>
 
-    <button type="submit">Salvar Matérias</button>
-  </form>
+        <div class="section-label">Criar Matéria Particular</div>
+        <input type="text" name="nova_materia_texto" class="field-input" placeholder="Ex: Legislação Específica" autocomplete="off">
+
+        <div class="modal-actions">
+          <button type="button" class="btn-secondary" id="closeModalBtn">Cancelar</button>
+          <button type="submit" class="btn-primary-mint">Salvar Alterações</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const openBtn = document.getElementById('openModalBtn');
+    const closeBtn = document.getElementById('closeModalBtn');
+    const overlay = document.getElementById('modalOverlay');
+
+    openBtn.addEventListener('click', () => overlay.classList.add('active'));
+    closeBtn.addEventListener('click', () => overlay.classList.remove('active'));
+
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) overlay.classList.remove('active');
+    });
+  </script>
 {% endblock %}

@@ -1,75 +1,330 @@
 {% extends 'base.html' %}
 
+{% block title %}
+  Metas · MetaEstudo
+{% endblock %}
+
 {% block content %}
-
 <div class="caixa">
-
     <div class="topo">
-        <h1>Suas Metas</h1>
-        <a href="{% url 'area_cadastro' %}" class="botao-cadastrar">Nova Meta</a>
+        <h1>Minhas Metas</h1>
+        
+        <button type="button" class="botao-cadastrar" id="openModalBtn">+ Nova Meta</button>
     </div>
 
-    {% for meta in lista_metas %}
-        <div class="item">
-            <p> {{ meta.titulo }}</p>
-            <div>
-                <a href="{% url 'area_editar' meta.id %}" class="link-editar">Editar</a>
-                <a href="{% url 'area_remover' meta.id %}" class="link-remover">Remover</a>
-            </div>
-        </div>
-    {% empty %}
-        <p>Nenhuma meta cadastrada ainda.</p>
-    {% endfor %}
+    <div class="metas-lista">
+        {% for meta in lista_metas %}
+            <div class="item {% if meta.data_limite and meta.data_limite < hoje %}item-atrasado{% endif %}">
+                <div class="meta-info">
+                    <p class="meta-titulo">{{ meta.titulo }}</p>
+                    
+                    <div class="meta-detalhes">
+                        {% if meta.materia %}
+                            <span class="badge-materia">{{ meta.materia.nome }}</span>
+                        {% endif %}
 
-    <p><a href="{% url 'index' %}" class="link-voltar">← Voltar</a></p>
+                        {% if meta.data_limite %}
+                            <span class="badge-prazo {% if meta.data_limite < hoje %}vencido{% endif %}">
+                                {% if meta.data_limite < hoje %}
+                                    Prazo vencido em: {{ meta.data_limite|date:"d/m/Y" }}
+                                {% else %}
+                                    Prazo: {{ meta.data_limite|date:"d/m/Y" }}
+                                {% endif %}
+                            </span>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="acoes">
+                    <a href="{% url 'area_editar' meta.id %}" class="link-editar">Editar</a>
+                    <a href="{% url 'area_remover' meta.id %}" class="link-remover">Remover</a>
+                </div>
+            </div>
+        {% empty %}
+            <div class="empty-state">
+                <p>Nenhuma meta criada.<br>Clique em "+ Nova Meta".</p>
+            </div>
+        {% endfor %}
+    </div>
 
 </div>
 
+<!-- Janela flutuante para nova meta -->
+<div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+        <h2 class="modal-title">Criar Nova Meta</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+            
+            {% for field in form %}
+                <div class="form-group">
+                    <label class="form-label" for="{{ field.id_for_label }}">
+                        {{ field.label }}
+                    </label>
+                    {{ field }}
+                    {% if field.errors %}
+                        <div class="form-error">
+                            {{ field.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            <div class="modal-actions">
+                <button type="button" class="btn-secondary" id="closeModalBtn">Cancelar</button>
+                <button type="submit" class="botao-cadastrar">Salvar Meta</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+  const openBtn = document.getElementById('openModalBtn');
+  const closeBtn = document.getElementById('closeModalBtn');
+  const overlay = document.getElementById('modalOverlay');
+
+  openBtn.addEventListener('click', () => overlay.classList.add('active'));
+  closeBtn.addEventListener('click', () => overlay.classList.remove('active'));
+
+  // Fecha se clicar fora da caixa do modal
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) overlay.classList.remove('active');
+  });
+</script>
 
 <style>
     .caixa {
-        max-width: 600px;
-        margin: 50px auto;
-        padding: 20px;
-        background-color: #121615;
-        color: #eef1ef;
-        border-radius: 10px;
-        font-family: Arial, sans-serif;
+        max-width: 720px;
+        margin: 40px auto;
+        padding: 0 20px;
     }
 
     .topo {
         display: flex; 
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 20px;
+        margin-bottom: 25px;
+    }
+
+    .topo h1 {
+        color: var(--text);
+        font-size: 1.75rem;
+        margin: 0;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+    }
+
+    .metas-lista {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
     }
 
     .item {
-        background-color: #0e1211;
-        padding: 10px 15px;
-        margin-bottom: 10px;
-        border-radius: 8px;
+        background-color: var(--panel);
+        border: 1px solid var(--border);
+        padding: 16px 20px;
+        border-radius: 14px;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        transition: border-color 0.2s ease;
     }
 
-    .item p {
-        margin: 0;
+    .item:hover {
+        border-color: var(--mint-border);
+    }
+
+    .item-atrasado {
+        border-left: 4px solid var(--danger);
+        background-color: var(--bg-soft);
+    }
+
+    .meta-titulo {
+        color: var(--text);
+        font-size: 1.05rem;
+        font-weight: 600;
+        margin: 0 0 8px 0;
+    }
+
+    .meta-detalhes {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .badge-materia {
+        font-size: 0.7rem;
+        padding: 3px 8px;
+        border-radius: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        background-color: var(--mint-surface);
+        color: var(--mint);
+        border: 1px solid var(--mint-border);
+    }
+
+    .badge-prazo {
+        font-size: 0.75rem;
+        color: var(--text-dim);
+    }
+
+    .badge-prazo.vencido {
+        color: var(--danger);
+        font-weight: 600;
     }
 
     .botao-cadastrar {
-        background-color: #7fbfa0;
-        color: #0a120d;
-        padding: 8px 15px;
-        border-radius: 5px;
+        background-color: var(--mint);
+        color: var(--on-mint);
+        padding: 10px 18px;
+        border-radius: 10px;
+        border: none;
         text-decoration: none; 
-        font-weight: bold;
+        font-weight: 600;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: background-color 0.2s;
     }
 
-    .link-editar { color: #7fbfa0; text-decoration: none; margin-right: 10px; }
-    .link-remover { color: #e2837a; text-decoration: none; }
-    .link-voltar { color: #9aa39e; text-decoration: none; }
-</style>
+    .botao-cadastrar:hover {
+        background-color: var(--mint-soft);
+    }
 
+    .acoes {
+        display: flex;
+        gap: 12px;
+    }
+
+    .link-editar { color: var(--mint); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+    .link-editar:hover { text-decoration: underline; }
+
+    .link-remover { color: var(--danger); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+    .link-remover:hover { text-decoration: underline; }
+
+    .link-voltar { color: var(--text-dim); text-decoration: none; font-size: 0.9rem; }
+    .link-voltar:hover { color: var(--text); }
+
+    .empty-state {
+        background-color: var(--panel);
+        border: 1px dashed var(--border);
+        border-radius: 14px;
+        padding: 40px;
+        text-align: center;
+        color: var(--text-dim);
+    }
+
+    /* Estilização do Modal */
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.75);
+        backdrop-filter: blur(4px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s ease;
+        z-index: 1000;
+    }
+
+    .modal-overlay.active {
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    .modal {
+        background-color: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        width: 90%;
+        max-width: 480px;
+        padding: 28px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    }
+
+    .modal-title {
+        color: var(--text);
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 18px;
+    }
+
+    .form-label {
+        display: block;
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: var(--text-dim);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin-bottom: 8px;
+    }
+
+    /* Classes aplicadas aos inputs via widgets do Django */
+    .field-input {
+        width: 100%;
+        padding: 12px 14px;
+        background-color: var(--field);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        color: var(--text);
+        font-size: 0.95rem;
+        box-sizing: border-box;
+        transition: border-color 0.2s ease, background-color 0.2s ease;
+        color-scheme: dark; /* Mantém o calendário nativo escuro */
+    }
+
+    .field-input:focus {
+        outline: none;
+        border-color: var(--mint-border);
+        background-color: var(--field-focus);
+    }
+
+    select.field-input {
+        cursor: pointer;
+    }
+
+    .form-error {
+        color: var(--danger-text);
+        font-size: 0.8rem;
+        margin-top: 6px;
+    }
+
+    .modal-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 12px;
+        margin-top: 24px;
+    }
+
+    .btn-secondary {
+        background-color: transparent;
+        color: var(--text-mid);
+        border: 1px solid var(--border);
+        padding: 10px 18px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+    }
+
+    .btn-secondary:hover {
+        background-color: var(--surface-hover);
+        color: var(--text);
+    }
+</style>
 {% endblock %}
