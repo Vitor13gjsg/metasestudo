@@ -69,13 +69,17 @@ class LoginForm(forms.Form):
     def get_user(self):
         return self.user
 
+class DateInput(forms.DateInput):
+    input_type = 'date'
+    format = '%Y-%m-%d'
+
 class MetaForm(forms.ModelForm):
     class Meta:
         model = Meta
         fields = ['titulo', 'data_limite', 'materia']
         widgets = {
             'titulo': forms.TextInput(attrs={'class': 'field-input', 'placeholder': 'Ex: Estudar 4 capítulos de Direito'}),
-            'data_limite': forms.DateInput(attrs={'class': 'field-input', type: 'date'}),
+            'data_limite': DateInput(attrs={'class': 'field-input',}),
             'materia': forms.Select(attrs={'class': 'field-input'}),
         }
 

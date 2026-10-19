@@ -6,6 +6,7 @@ let theme = savedTheme === 'light' ? 'light' : 'dark'
 function applyTheme() {
     const light = theme === 'light'
     root.dataset.theme = theme
+    root.style.colorScheme = theme
 
     if (light) {
         root.style.setProperty('--bg', '#f4f6f5')

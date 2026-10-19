@@ -36,8 +36,18 @@
                 </div>
 
                 <div class="acoes">
-                    <a href="{% url 'area_editar' meta.id %}" class="link-editar">Editar</a>
-                    <a href="{% url 'area_remover' meta.id %}" class="link-remover">Remover</a>
+                    <button type="button" 
+                            class="link-editar btn-acao" 
+                            data-id="{{ meta.id }}"
+                            data-titulo="{{ meta.titulo }}"
+                            data-limite="{% if meta.data_limite %}{{ meta.data_limite|date:'Y-m-d' }}{% endif %}"
+                            data-materia="{% if meta.materia %}{{ meta.materia.id }}{% endif %}">
+                        Editar
+                    </button>
+                    <a href="{% url 'area_remover' meta.id %}" 
+                    class="link-remover" 
+                    onclick="return confirm('Tem certeza de que deseja apagar esta meta?');">
+                    Remover</a>
                 </div>
             </div>
         {% empty %}
@@ -50,12 +60,15 @@
 </div>
 
 <!-- Janela flutuante para nova meta -->
-<div class="modal-overlay" id="modalOverlay">
+<div class="modal-overlay {% if form.errors or meta_editando %}active{% endif %}" id="modalOverlay">
     <div class="modal">
-        <h2 class="modal-title">Criar Nova Meta</h2>
+        <h2 class="modal-title" id="modalTitle">
+            {% if meta_editando %}Editar Meta{% else %}Criar Nova Meta{% endif %}
+        </h2>
 
-        <form method="POST">
+        <form method="POST" action="{% url 'metas' %}">
             {% csrf_token %}
+            <input type="hidden" name="meta_id" id="metaIdInput" value="{% if meta_editando %}{{ meta_editando.id }}{% endif %}">
             
             {% for field in form %}
                 <div class="form-group">
@@ -73,7 +86,9 @@
 
             <div class="modal-actions">
                 <button type="button" class="btn-secondary" id="closeModalBtn">Cancelar</button>
-                <button type="submit" class="botao-cadastrar">Salvar Meta</button>
+                <button type="submit" class="botao-cadastrar" id="submitBtn">
+                    {% if meta_editando %}Guardar Alterações{% else %}Salvar Meta{% endif %}
+                </button>
             </div>
         </form>
     </div>
@@ -83,14 +98,56 @@
   const openBtn = document.getElementById('openModalBtn');
   const closeBtn = document.getElementById('closeModalBtn');
   const overlay = document.getElementById('modalOverlay');
+  const modalTitle = document.getElementById('modalTitle');
+  const submitBtn = document.getElementById('submitBtn');
+  const metaIdInput = document.getElementById('metaIdInput');
 
-  openBtn.addEventListener('click', () => overlay.classList.add('active'));
+  // Formulário do Django
+  const tituloInput = document.querySelector('[name="titulo"]');
+  const dataLimiteInput = document.querySelector('[name="data_limite"]');
+  const materiaSelect = document.querySelector('[name="materia"]');
+
+  function resetForm() {
+    metaIdInput.value = '';
+    if (tituloInput) tituloInput.value = '';
+    if (dataLimiteInput) dataLimiteInput.value = '';
+    if (materiaSelect) materiaSelect.value = '';
+    modalTitle.textContent = 'Criar Nova Meta';
+    submitBtn.textContent = 'Salvar Meta';
+  }
+
+  // Abrir modal para nova meta
+  openBtn.addEventListener('click', () => {
+    resetForm();
+    overlay.classList.add('active');
+  });
+
+  // Abrir modal para editar meta existente
+  document.querySelectorAll('.link-editar').forEach(btn => {
+    btn.addEventListener('click', () => {
+      resetForm();
+      const id = btn.dataset.id;
+      const titulo = btn.dataset.titulo;
+      const limite = btn.dataset.limite;
+      const materia = btn.dataset.materia;
+
+      metaIdInput.value = id;
+      if (tituloInput) tituloInput.value = titulo;
+      if (dataLimiteInput) dataLimiteInput.value = limite;
+      if (materiaSelect) materiaSelect.value = materia;
+
+      modalTitle.textContent = 'Editar Meta';
+      submitBtn.textContent = 'Guardar Alterações';
+      overlay.classList.add('active');
+    });
+  });
+
   closeBtn.addEventListener('click', () => overlay.classList.remove('active'));
 
-  // Fecha se clicar fora da caixa do modal
   overlay.addEventListener('click', (e) => {
     if (e.target === overlay) overlay.classList.remove('active');
   });
+  
 </script>
 
 <style>
@@ -196,6 +253,10 @@
     .acoes {
         display: flex;
         gap: 12px;
+        align-items: center;
+        text-decoration: none;
+        font-size: 0.9rem;
+        font-weight: 500;
     }
 
     .link-editar { color: var(--mint); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
@@ -203,9 +264,6 @@
 
     .link-remover { color: var(--danger); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
     .link-remover:hover { text-decoration: underline; }
-
-    .link-voltar { color: var(--text-dim); text-decoration: none; font-size: 0.9rem; }
-    .link-voltar:hover { color: var(--text); }
 
     .empty-state {
         background-color: var(--panel);
@@ -281,7 +339,7 @@
         font-size: 0.95rem;
         box-sizing: border-box;
         transition: border-color 0.2s ease, background-color 0.2s ease;
-        color-scheme: dark; /* Mantém o calendário nativo escuro */
+        color-scheme: light dark; /* Calendário respeita temas claro e escuro */
     }
 
     .field-input:focus {
@@ -325,6 +383,14 @@
     .btn-secondary:hover {
         background-color: var(--surface-hover);
         color: var(--text);
+    }
+
+    .btn-acao {
+        background: none;
+        border: none;
+        padding: 0;
+        font: inherit;
+        cursor: pointer;
     }
 </style>
 {% endblock %}

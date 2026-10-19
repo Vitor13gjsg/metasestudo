@@ -106,8 +106,14 @@ def metas(request):
     lista_metas = Meta.objects.filter(usuario=request.user).order_by('data_limite')
     hoje = timezone.localdate()
 
+    # Editar uma meta específica
+    meta_id = request.POST.get('meta_id') or request.GET.get('editar')
+    meta_instancia = None
+    if meta_id:
+        meta_instancia = get_object_or_404(Meta, id=meta_id, usuario=request.user)
+
     if request.method == 'POST':
-        form = MetaForm(request.POST, user=request.user)
+        form = MetaForm(request.POST, instance=meta_instancia, user=request.user)
         if form.is_valid():
             meta = form.save(commit=False)
             meta.usuario = request.user
@@ -120,35 +126,9 @@ def metas(request):
         'lista_metas': lista_metas,
         'hoje': hoje,
         'form': form,
+        'meta_editando': meta_instancia,
     }
     return render(request, "pages/app/metas.html", context)
-
-@login_required(login_url='login')
-def area_cadastro(request):
-    if request.method == 'POST':
-        form = MetaForm(request.POST, user=request.user)
-        if form.is_valid():
-            meta = form.save(commit=False)
-            meta.usuario = request.user
-            meta.save()
-            return redirect('metas')
-    else:
-        form = MetaForm(user=request.user)
-        
-    return render(request, "pages/app/area_cadastro.html", {'form': form})
-
-def area_editar(request, id):
-    meta = Meta.objects.get(pk=id)
-    form = MetaForm(request.POST or None, instance=meta)
-
-    if form.is_valid():
-        form.save()
-        return redirect('metas')
-
-    context = {
-        'form': form
-    }
-    return render(request, 'pages/app/area_cadastro.html', context)
 
 def area_remover(request, id):
     meta = Meta.objects.get(pk=id)

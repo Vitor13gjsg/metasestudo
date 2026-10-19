@@ -38,3 +38,14 @@
     --mint-glow: rgba(127, 191, 160, 0.06);
     --surface-hover: rgba(255, 255, 255, 0.04);
 }
+
+/* Força a remoção de transições na troca de temas (para evitar inconsistências) */
+*, *::before, *::after {
+    transition: none !important;
+    animation: none !important;
+}
+
+/* Mantém apenas a animação do botão deslizante */
+.theme-toggle__thumb {
+    transition: transform 0.2s ease !important;
+}

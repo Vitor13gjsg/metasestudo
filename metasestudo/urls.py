@@ -17,8 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from core.views import (
-    index, home, login, cadastro, materias, apagar_materia, metas,
-    area_cadastro, area_editar, area_remover, sessoes,
+    index, home, login, cadastro, materias, apagar_materia, metas, area_remover, sessoes,
     conta, alterar_senha, sair, pagina_informativa
 )
 
@@ -35,8 +34,6 @@ urlpatterns = [
     path('materias/', materias, name='materias'),
     path('materias/apagar/<int:materia_id>/', apagar_materia, name='apagar_materia'),
     path('metas/', metas, name='metas'),
-    path('area_cadastro/', area_cadastro, name='area_cadastro'),
-    path('area_editar/<int:id>/', area_editar, name='area_editar'),
     path('area_remover/<int:id>/', area_remover, name='area_remover'),
     path('sessoes/', sessoes, name='sessoes'),
     path('conta/', conta, name='conta'),
