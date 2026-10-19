@@ -14,17 +14,23 @@
 
     <div class="metas-lista">
         {% for meta in lista_metas %}
-            <div class="item {% if meta.data_limite and meta.data_limite < hoje %}item-atrasado{% endif %}">
+            <div class="item {% if meta.concluida %}item-concluido{% elif meta.data_limite and meta.data_limite < hoje %}item-atrasado{% endif %}">
                 <div class="meta-info">
-                    <p class="meta-titulo">{{ meta.titulo }}</p>
+                    <p class="meta-titulo {% if meta.concluida %}titulo-concluido{% endif %}">
+                        {{ meta.titulo }}
+                    </p>
                     
                     <div class="meta-detalhes">
+                        {% if meta.concluida %}
+                            <span class="badge-concluida">✓ Concluída</span>
+                        {% endif %}
+
                         {% if meta.materia %}
                             <span class="badge-materia">{{ meta.materia.nome }}</span>
                         {% endif %}
 
                         {% if meta.data_limite %}
-                            <span class="badge-prazo {% if meta.data_limite < hoje %}vencido{% endif %}">
+                            <span class="badge-prazo {% if not meta.concluida and meta.data_limite < hoje %}vencido{% endif %}">
                                 {% if meta.data_limite < hoje %}
                                     Prazo vencido em: {{ meta.data_limite|date:"d/m/Y" }}
                                 {% else %}
@@ -44,10 +50,12 @@
                             data-materia="{% if meta.materia %}{{ meta.materia.id }}{% endif %}">
                         Editar
                     </button>
+                    
                     <a href="{% url 'area_remover' meta.id %}" 
                     class="link-remover" 
                     onclick="return confirm('Tem certeza de que deseja apagar esta meta?');">
-                    Remover</a>
+                        Remover
+                    </a>
                 </div>
             </div>
         {% empty %}
@@ -55,6 +63,8 @@
                 <p>Nenhuma meta criada.<br>Clique em "+ Nova Meta".</p>
             </div>
         {% endfor %}
+
+
     </div>
 
 </div>
@@ -152,9 +162,9 @@
 
 <style>
     .caixa {
-        max-width: 720px;
-        margin: 40px auto;
-        padding: 0 20px;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 10px;
     }
 
     .topo {
@@ -391,6 +401,28 @@
         padding: 0;
         font: inherit;
         cursor: pointer;
+    }
+
+    /* Feedback visual para metas concluídas */
+    .item-concluido {
+        border-left: 4px solid var(--mint);
+        opacity: 0.85;
+    }
+
+    .titulo-concluido {
+        text-decoration: line-through;
+        color: var(--text-dim);
+    }
+
+    .badge-concluida {
+        font-size: 0.7rem;
+        padding: 3px 8px;
+        border-radius: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        background-color: var(--mint-surface);
+        color: var(--mint);
+        border: 1px solid var(--mint-border);
     }
 </style>
 {% endblock %}

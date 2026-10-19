@@ -7,7 +7,7 @@ from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect
 from django.utils import timezone
 
-from core.models import Meta, Materia
+from core.models import Meta, Materia, Sessao
 from .forms import CadastroForm, LoginForm, MetaForm
 
 # Create your views here.
@@ -135,8 +135,41 @@ def area_remover(request, id):
     meta.delete()
     return redirect('metas')
 
+@login_required(login_url='login')
 def sessoes(request):
-    return render(request, "pages/app/sessoes.html")
+    if request.method == 'POST':
+        action = request.POST.get('action')
+        
+        if action == 'salvar_sessao':
+            meta_id = request.POST.get('meta_id')
+            duracao = int(request.POST.get('duracao_segundos', 0))
+            concluir_meta = request.POST.get('concluir_meta') == 'on'
+            
+            meta = get_object_or_404(Meta, id=meta_id, usuario=request.user)
+            
+            if duracao > 0:
+                Sessao.objects.create(
+                    usuario=request.user,
+                    meta=meta,
+                    duracao_segundos=duracao
+                )
+            
+            if concluir_meta:
+                meta.concluida = True
+                meta.save()
+                
+            return redirect('sessoes')
+
+    # Metas ativas para o dropdown do modal
+    metas_ativas = Meta.objects.filter(usuario=request.user, concluida=False).order_by('data_limite')
+    # Histórico de sessões
+    historico_sessoes = Sessao.objects.filter(usuario=request.user).order_by('-criada_em')
+
+    context = {
+        'metas_ativas': metas_ativas,
+        'historico_sessoes': historico_sessoes
+    }
+    return render(request, "pages/app/sessoes.html", context)
    
 @login_required(login_url="login")
 def conta(request):

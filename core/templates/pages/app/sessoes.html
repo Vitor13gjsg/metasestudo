@@ -5,226 +5,196 @@
 {% endblock %}
 
 {% block content %}
-
 <div class="caixa">
     <div class="topo">
-        <div>
-            <h1>Minhas Sessões</h1>
-            <p class="subtitulo">Organize seus horários e mantenha o foco nos estudos.</p>
-        </div>
-
-        <button type="button" class="botao-cadastrar" id="openModalBtn">
-           + Nova sessão
-        </button>
+        <h1>Sessões de Estudo</h1>
+        <button type="button" class="botao-cadastrar" id="openModalBtn">+ Nova Sessão</button>
     </div>
 
-    <div class="sessoes-lista">
+    <!-- Área de Sessão Ativa / Cronómetro -->
+    <div id="cronometroCard" class="panel-cronometro" style="display: none;">
+        <div class="cronometro-header">
+            <span class="badge-materia" id="cronometroMateria">Matéria</span>
+            <h2 id="cronometroMetaTitulo">Título da Meta</h2>
+        </div>
 
-        {% for sessao in lista_sessoes %}
-            <div class="item">
+        <div class="display-tempo" id="timerDisplay">00:00:00</div>
 
-                <div class="sessao-info">
-                    <p class="sessao-titulo">
-                        {{ sessao.titulo }}
-                    </p>
+        <form method="POST" id="formSalvarSessao">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="salvar_sessao">
+            <input type="hidden" name="meta_id" id="metaIdInput">
+            <input type="hidden" name="duracao_segundos" id="duracaoInput" value="0">
 
-                     <div class="sessao-detalhe">
+            <div class="opcao-concluir">
+                <label class="checkbox-container">
+                    <input type="checkbox" name="concluir_meta" id="concluirMetaCheckbox">
+                    <span>Marcar meta como concluída ao finalizar</span>
+                </label>
+            </div>
 
-                        {% if sessao.materia%}
-                            <span class="badge-materia">
-                                {{ sessao.materia.nome }}
-                            </span>
-                        {% endif %}
+            <div class="cronometro-acoes">
+                <button type="button" class="btn-secondary" id="btnPausar">Pausar</button>
+                <button type="submit" class="botao-cadastrar" id="btnFinalizar">Finalizar e Salvar</button>
+            </div>
+        </form>
+    </div>
 
-                         {% if sessao.data %}
-                            <span class="badge-data">
-                                <span aria-hidden="true">📅</span>
-                                {{ sessao.data|date:"d/m/y" }}
-                            </span>
-                        {% endif %}       
-                        
-                          {% if sessao.hora_inicio %}
-                            <span class="badge-horario">
-                                <span aria-hidden="true">🕒</span>
-                                {{ sessao.hora_inicio|time:"H:i" }}
-
-                                {% if sessoes.hora_fim %}
-                                    - {{ sessoes.hora_fim|time:"H:i" }}
-                                {% endif %}
-                            </span>
-
+    <!-- Histórico de Sessões -->
+    <div class="historico-secao">
+        <h2 class="subtitulo">Histórico</h2>
+        
+        <div class="sessoes-lista">
+            {% for sessao in historico_sessoes %}
+                <div class="item {% if sessao.meta.concluida %}item-concluido{% endif %}">
+                    <div class="meta-info">
+                        <p class="meta-titulo {% if sessao.meta.concluida %}titulo-concluido{% endif %}">
+                            {{ sessao.meta.titulo }}
+                        </p>
+                        <div class="meta-detalhes">
+                            {% if sessao.meta.concluida %}
+                                <span class="badge-concluida">✓ Concluída</span>
                             {% endif %}
 
-                        {% if sessao.duracao %}
-                            <span class="badge-duracao">
-                                {{ sessao.duracao }} min
-                            </span>
-                        {% endif %}
-
+                            {% if sessao.meta.materia %}
+                        <span class="badge-materia">{{ sessao.meta.materia.nome }}</span>
+                            {% endif %}
+                            <span class="badge-prazo">{{ sessao.criada_em|date:"d/m/Y H:i" }}</span>
+                        </div>
                     </div>
 
-                     {% if sessao.descricao %}
-                        <p class="sessao-descricao">
-                            {{ sessao.descricao }}
-                        </p>
-                    {% endif %}
+                    <div class="tempo-destaque">
+                        {{ sessao.duracao_formatada }}
+                    </div>
                 </div>
-
-                 <div class="acoes">
-                    <a href="{% url 'sessao_aditar' sessao.id %}"
-                       class="link-editar">
-                        Editar
-                    </a>
-
-                    <a href="{% url 'sessao_remover' sessao.id %}"
-                       class="link-remover">
-                        Remover
-                    </a>
-                </div>
-
-            </div>
-
             {% empty %}
-
-            <div class="empty-state">
-                <div class="empty-icon">📚</div>
-                <h3>Nenhuma sessão cadastrada</h3>
-                <p>
-                    Organize sua rotina de estudos criando a sua primeira sessão
-                </p>
-                <button type="button"
-                        class="botao-cadastrar"
-                        onclick="document.getElementById('modalOverlay').classList.add('active')">
-                    Criar a minha primeira sessão
-                </button>
-            </div>
-
-{% endfor %}
-
+                <div class="empty-state">
+                    <p>Nenhuma sessão registada.<br>Clique em "+ Nova Sessão" para iniciar um cronômetro.</p>
+                </div>
+            {% endfor %}
+        </div>
     </div>
 </div>
 
-
+<!-- Modal Escolher Meta -->
 <div class="modal-overlay" id="modalOverlay">
     <div class="modal">
+        <h2 class="modal-title">Nova Sessão de Estudo</h2>
 
-        <div class="modal-header">
-            <div>
-                <h2 class="modal-title">Nova sessão</h2>
-                <p class="modal-subtitulo">
-                    Preencha os dados para organizar seus estudo.
+        {% if metas_ativas %}
+            <div class="form-group">
+                <label class="form-label" for="selectMeta">Selecione a Meta</label>
+                <select id="selectMeta" class="field-input">
+                    <option value="">-- Selecione uma meta --</option>
+                    {% for meta in metas_ativas %}
+                        <option value="{{ meta.id }}" 
+                                data-titulo="{{ meta.titulo }}" 
+                                data-materia="{% if meta.materia %}{{ meta.materia.nome }}{% else %}Geral{% endif %}">
+                            {{ meta.titulo }} {% if meta.materia %}({{ meta.materia.nome }}){% endif %}
+                        </option>
+                    {% endfor %}
+                </select>
             </div>
 
-            <button type="button"
-                    class="modal-close"
-                    id="closeXBtn"
-                    aria-label="Fechar modal">
-                &times;
-            </button>
-        </div>
+            <div class="modal-actions">
+                <button type="button" class="btn-secondary" id="closeModalBtn">Cancelar</button>
+                <button type="button" class="botao-cadastrar" id="btnIniciarCronometro">Iniciar Cronômetro</button>
+            </div>
+        {% else %}
+            <p class="modal-texto">Não tem nenhuma meta pendente. Crie uma meta primeiro antes de iniciar uma sessão.</p>
+            <div class="modal-actions">
+                <button type="button" class="btn-secondary" id="closeModalBtn">Fechar</button>
+            </div>
+        {% endif %}
+    </div>
+</div>
 
-        <form method="POST">
-            {% csrf_token %}
-
-            {% for field in form %}
-                <div class="form-group">
-
-                <label class="form-label"
-                           for="{{ field.id_for_label }}">
-                        {{ field.label }}
-                    </label>
-
-                    {{ field }}
-
-                    {% if field.help_text %}
-                        <small class="help-text">
-                            {{ field.help_text }}
-                        </small>
-                    {% endif %}
-
-                    {% if field.erros %}
-                        <div class="form-error">
-                            {{ field.erros }}
-                        </div>
-                    {% endif %}
-
-                </div>
-            {% endfor %}
-
-            {% if form.non_field_errors %}
-                <div class="form-error">
-                    {{ form.non_field_erros }}
-                </div>
-            {% endif %}
-
-        <div class="modal-actions">
-                <button type="button"
-                        class="btn-secondary"
-                        id="closeModalBtn">
-                    Cancelar
-                </button>
-
-                <button type="submit" class="button-cadastrar">
-                   Salvar sessão
-                </button>
-              </div>
-            </form>
-
-          </div>
-        </div>
-
-        <script>
-    const  openBtn = document.getElementById('openModalBtn');
+<script>
+    const openBtn = document.getElementById('openModalBtn');
     const closeBtn = document.getElementById('closeModalBtn');
-    const closeXBtn = document.getElementById('closeXBtn');
     const overlay = document.getElementById('modalOverlay');
+    
+    const selectMeta = document.getElementById('selectMeta');
+    const btnIniciarCronometro = document.getElementById('btnIniciarCronometro');
 
-    function abrirModal() {
-        overlay.classList.add('active');
-    }
+    const cronometroCard = document.getElementById('cronometroCard');
+    const cronometroMateria = document.getElementById('cronometroMateria');
+    const cronometroMetaTitulo = document.getElementById('cronometroMetaTitulo');
+    const timerDisplay = document.getElementById('timerDisplay');
+    const btnPausar = document.getElementById('btnPausar');
+    
+    const metaIdInput = document.getElementById('metaIdInput');
+    const duracaoInput = document.querySelector('#duracaoInput');
 
-    function fecharModal() {
-        overlay.classList.remove('active');
-    }
+    let timerInterval = null;
+    let segundosDecorridos = 0;
+    let estaPausado = false;
 
-
-   openBtn.addEventListener('click', abrirModal);
-    closeBtn.addEventListener('click', fecharModal);
-    closeXBtn.addEventListener('click', fecharModal);
-
-    // Fecha ao clicar fora da janela
-    overlay.addEventListener('click', function(event) {
-        if (event.target === overlay) {
-            fecharModal();
-        }
+    // Abrir/Fechar Modal
+    openBtn.addEventListener('click', () => overlay.classList.add('active'));
+    closeBtn.addEventListener('click', () => overlay.classList.remove('active'));
+    overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) overlay.classList.remove('active');
     });
 
-    
-    document.addEventListener('keydown', function(event) {
-        if (event.key === 'Escape') {
-            fecharModal();
-        }
-    });
+    // Iniciar Cronómetro
+    if (btnIniciarCronometro) {
+        btnIniciarCronometro.addEventListener('click', () => {
+            const selectedOption = selectMeta.options[selectMeta.selectedIndex];
+            if (!selectedOption || !selectedOption.value) {
+                alert('Por favor, selecione uma meta para começar.');
+                return;
+            }
 
-    
-    {% if form.errors %}
-        abrirModal();
-    {% endif %}
-    
+            // Configurar Card do Cronómetro
+            metaIdInput.value = selectedOption.value;
+            cronometroMetaTitulo.textContent = selectedOption.dataset.titulo;
+            cronometroMateria.textContent = selectedOption.dataset.materia;
+
+            overlay.classList.remove('active');
+            cronometroCard.style.display = 'block';
+
+            iniciarTimer();
+        });
+    }
+
+    function formatarTempo(segundos) {
+        const hrs = Math.floor(segundos / 3600);
+        const mins = Math.floor((segundos % 3600) / 60);
+        const secs = segundos % 60;
+        return `${String(hrs).padStart(2, '0')}:${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+    }
+
+    function iniciarTimer() {
+        clearInterval(timerInterval);
+        timerInterval = setInterval(() => {
+            if (!estaPausado) {
+                segundosDecorridos++;
+                timerDisplay.textContent = formatarTempo(segundosDecorridos);
+                duracaoInput.value = segundosDecorridos;
+            }
+        }, 1000);
+    }
+
+    // Pausar / Retomar
+    btnPausar.addEventListener('click', () => {
+        estaPausado = !estaPausado;
+        btnPausar.textContent = estaPausado ? 'Retomar' : 'Pausar';
+    });
 </script>
 
- .caixa {
-        max-width: 900px;
+<style>
+    .caixa {
+        max-width: 720px;
         margin: 40px auto;
         padding: 0 20px;
     }
 
     .topo {
-        display: flex;
+        display: flex; 
         justify-content: space-between;
         align-items: center;
-        gap: 20;
-        margin-bottom: 28;
+        margin-bottom: 25px;
     }
 
     .topo h1 {
@@ -236,59 +206,96 @@
     }
 
     .subtitulo {
-        color: var(--text-dim);
-        font-size: 0.9rem;
-        margin: 8px 0 0;
-        line-height: 1.5;
+        color: var(--text);
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin: 30px 0 15px 0;
     }
 
-    .sessoes-lista {
+    /* Card do Cronómetro */
+    .panel-cronometro {
+        background-color: var(--panel);
+        border: 1px solid var(--mint-border);
+        border-radius: 16px;
+        padding: 28px;
+        text-align: center;
+        margin-bottom: 30px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .cronometro-header h2 {
+        color: var(--text);
+        font-size: 1.3rem;
+        margin: 10px 0 0 0;
+    }
+
+    .display-tempo {
+        font-size: 3.5rem;
+        font-weight: 700;
+        color: var(--mint);
+        font-family: monospace;
+        margin: 20px 0;
+        letter-spacing: 2px;
+    }
+
+    .opcao-concluir {
+        margin-bottom: 20px;
+    }
+
+    .checkbox-container {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--text-mid);
+        font-size: 0.9rem;
+        cursor: pointer;
+    }
+
+    .cronometro-acoes {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+    }
+
+    .tempo-destaque {
+        font-family: monospace;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--mint);
+    }
+
+    .metas-lista, .sessoes-lista {
         display: flex;
         flex-direction: column;
-        gap: 14;
+        gap: 12px;
     }
 
     .item {
         background-color: var(--panel);
         border: 1px solid var(--border);
-        padding: 20px;
+        padding: 16px 20px;
         border-radius: 14px;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        gap: 20px;
-        transition: border-color 0.2s ease,
-                    transform 0.2s ease;
     }
 
-    .item;hover {
-        border-color: var(--mint-border);
-        transform: translateY(-2px);
-    }
-
-    .sessao-info {
-        min-width: 0;
-        flex: 1;
-    }
-
-    .sessao-titulo {
+    .meta-titulo {
         color: var(--text);
         font-size: 1.05rem;
         font-weight: 600;
-        margin: 0 0 12px;
-        overflow-wrap: anywhere;
+        margin: 0 0 8px 0;
     }
 
-    .sessao-detalhes{
+    .meta-detalhes {
         display: flex;
-        align-items: center;
-        flex-wrap: wrap;
         gap: 10px;
+        align-items: center;
     }
 
-    .badge-materia{
+    .badge-materia {
         font-size: 0.7rem;
-        padding: 4px 9px;
+        padding: 3px 8px;
         border-radius: 12px;
         font-weight: 700;
         text-transform: uppercase;
@@ -297,183 +304,61 @@
         border: 1px solid var(--mint-border);
     }
 
-    .badge-data,
-    .badge-horario,
-    .badge-duracao {
-        font-size: 0.8rem;
+    .badge-prazo {
+        font-size: 0.75rem;
         color: var(--text-dim);
-    }
-
-    .badge-duracao {
-        background-color: var(--bg-soft);
-        border: 1px solid var(--border);
-        padding: 4px 8px;
-        border-radius: 8px;
-    }
-
-    .sessao-descricao {
-        color: var(--text-dim);
-        font-size: 0.875rem;
-        line-height: 1.6;
-        margin: 12px 0 0;
-        overflow-wrap: anywhere;
-    }
-
-    .botao-cadastrar {
-        background-color: var(--mint);
-        color: var(--on-mint);
-        padding: 10px 18px;
-        border-radius: 10px;
-        border: none;
-        text-decoration: none;
-        font-weight: 600;
-        font-size: 0.9rem;
-        cursor: pointer;
-        white-space: nowrap;
-        transition: background-color 0.2s ease;
-    }
-
-    .botao-cadastrar:hover {
-        background-color: var(--mint-soft);
-    }
-
-    .acoes {
-        display: flex;
-        align-items: center;
-        gap: 14px;
-        flex-shrink: 0;
-    }
-
-    .link-editar,
-    .link-remover {
-        text-decoration: none;
-        font-size: 0.9rem;
-        font-weight: 500;
-    }
-
-    .link-editar {
-        color: var(--mint);
-    }
-
-    .link-editar:hover {
-        text-decoration: underline;
-    }
-
-    .link-remover {
-        color: var(--danger);
-    }
-
-    .link-remover:hover {
-        text-decoration: underline;
     }
 
     .empty-state {
         background-color: var(--panel);
         border: 1px dashed var(--border);
         border-radius: 14px;
-        padding: 45px 24px;
+        padding: 40px;
         text-align: center;
         color: var(--text-dim);
     }
 
-    .empty-icon {
-        font-size: 2.5rem;
-        margin-bottom: 12px;
-    }
-
-    .empty-state h3 {
-        color: var(--text);
-        font-size: 1.1rem;
-        margin: 0 0 10px;
-    }
-
-    .empty-state p {
-        font-size: 0.9rem;
-        line-height: 1.6;
-        margin: 0 0 20px;
-    }
-
-    /* Modal */
     .modal-overlay {
         position: fixed;
-        inset: 0;
-        width: 100%;
-        height: 100%;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
         background-color: rgba(0, 0, 0, 0.75);
         backdrop-filter: blur(4px);
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 20px;
-        box-sizing: border-box;
         opacity: 0;
-        visibility: hidden;
         pointer-events: none;
-        transition: opacity 0.2s ease,
-                    visibility 0.2s ease;
         z-index: 1000;
-        overflow-y: auto;
     }
 
     .modal-overlay.active {
         opacity: 1;
-        visibility: visible;
-        pointer-events: auto;
+        pointer-events: all;
     }
 
     .modal {
         background-color: var(--panel);
         border: 1px solid var(--border);
         border-radius: 16px;
-        width: 100%;
-        max-width: 500px;
-        max-height: calc(100vh - 40px);
-        overflow-y: auto;
+        width: 90%;
+        max-width: 480px;
         padding: 28px;
-        box-sizing: border-box;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-        transform: translateY(10px);
-        transition: transform 0.2s ease;
-    }
-
-    .modal-overlay.active .modal {
-        transform: translateY(0);
-    }
-
-    .modal-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        gap: 12px;
-        margin-bottom: 24px;
     }
 
     .modal-title {
         color: var(--text);
         font-size: 1.25rem;
         font-weight: 700;
-        margin: 0;
+        margin-bottom: 20px;
     }
 
-    .modal-subtitulo {
-        color: var(--text-dim);
-        font-size: 0.85rem;
-        line-height: 1.5;
-        margin: 8px 0 0;
-    }
-
-    .modal-close {
-        background: transparent;
-        border: none;
-        color: var(--text-dim);
-        font-size: 1.8rem;
-        cursor: pointer;
-        line-height: 1;
-        padding: 0 4px;
-    }
-
-    .modal-close:hover {
-        color: var(--text);
+    .modal-texto {
+        color: var(--text-mid);
+        font-size: 0.95rem;
+        margin-bottom: 20px;
     }
 
     .form-group {
@@ -490,59 +375,34 @@
         margin-bottom: 8px;
     }
 
-    .form-group input, 
-    .form-group select,
-    .form-group textarea,
     .field-input {
-        display: block;
         width: 100%;
         padding: 12px 14px;
         background-color: var(--field);
         border: 1px solid var(--border);
         border-radius: 10px;
         color: var(--text);
-        font-family: inherit;
         font-size: 0.95rem;
         box-sizing: border-box;
-        transition: border-color 0.2s ease,
-                    background-color 0.2s ease;
-        color-scheme: dark;
-    }
-
-    .form-group textarea {
-        min-height: 100px;
-        resize: vertical;
-    }
-
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus,
-    .field-input:focus {
-        outline: none;
-        border-color: var(--mint-border);
-        background-color: var(--field-focus);
-    }
-
-    .help-text {
-        display: block;
-        margin-top: 6px;
-        color: var(--text-dim);
-        font-size: 0.8rem;
-        line-height: 1.5;
-    }
-
-    .form-error {
-        color: var(--danger-text);
-        font-size: 0.8rem;
-        margin-top: 6px;
+        color-scheme: light dark;
     }
 
     .modal-actions {
         display: flex;
         justify-content: flex-end;
-        flex-wrap: wrap;
         gap: 12px;
         margin-top: 24px;
+    }
+
+    .botao-cadastrar {
+        background-color: var(--mint);
+        color: var(--on-mint);
+        padding: 10px 18px;
+        border-radius: 10px;
+        border: none;
+        font-weight: 600;
+        font-size: 0.9rem;
+        cursor: pointer;
     }
 
     .btn-secondary {
@@ -554,54 +414,27 @@
         font-size: 0.9rem;
         border-radius: 10px;
         cursor: pointer;
-        transition: all 0.2s ease;
     }
 
-    .btn-secondary:hover {
-        background-color: var(--surface-hover);
-        color: var(--text);
+    .item-concluido {
+    border-left: 4px solid var(--mint);
+    opacity: 0.85;
     }
 
-    
-    @media (max-width: 600px) {
-        .caixa {
-            margin: 25px auto;
-            padding: 0 14px;
-        }
+    .titulo-concluido {
+        text-decoration: line-through;
+        color: var(--text-dim);
+    }
 
-        .topo {
-            align-items: flex-start;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .topo h1 {
-            font-size: 1.5rem;
-        }
-
-        .item {
-            align-items: flex-start;
-            flex-direction: column;
-            gap: 16px;
-            padding: 16px;
-        }
-
-        .acoes {
-            align-self: flex-end;
-        }
-
-        .modal {
-            padding: 22px 18px;
-        }
-
-        .modal-actions {
-            flex-direction: column-reverse;
-        }
-
-        .modal-actions button {
-            width: 100%;
-        }
+    .badge-concluida {
+        font-size: 0.7rem;
+        padding: 3px 8px;
+        border-radius: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        background-color: var(--mint-surface);
+        color: var(--mint);
+        border: 1px solid var(--mint-border);
     }
 </style>
-
 {% endblock %}
